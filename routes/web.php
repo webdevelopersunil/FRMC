@@ -22,8 +22,9 @@ Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('nodal.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

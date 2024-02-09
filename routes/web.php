@@ -25,6 +25,11 @@ Route::get('/dashboard', function () {
     return view('nodal.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/complaints/list', function () {
+    return view('nodal.list');
+})->middleware(['auth', 'verified'])->name('nodal.complaints');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

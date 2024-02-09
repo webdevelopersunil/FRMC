@@ -7,7 +7,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
+use LdapRecord\Container;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginRequest extends FormRequest
 {
@@ -27,7 +31,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            // 'email' => ['required', 'string', 'email'],
+            'cpfNo' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -41,11 +46,40 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $cpfNo      =   $this->input('cpfNo');
+        $password   =   $this->input('password');
+
+        $user       =   User::where('cpfNo', $cpfNo)->first();
+        
+        if($user == null){
+
+            $connection = Container::getConnection('default');
+            $record = $connection->query()->findBy('samaccountname', $cpfNo );
+
+            if(!$record) {
+
+                throw ValidationException::withMessages([
+                    'cpfno' => trans('auth.failed'),
+                ]);
+
+            }else{
+
+                $user = User::create([
+                    'name' => $record['name'][0],
+                    'email' => $record['mail'][0],
+                    'cpfNo' => $cpfNo,
+                    // 'username' => $request->username,
+                    'password' => Hash::make($password),
+                ]);
+            }
+        }
+
+        // Attempt LDAP authentication
+        if (! Auth::attempt(['cpfno' => $cpfNo, 'password' => $password])) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'cpfno' => trans('auth.failed'),
             ]);
         }
 

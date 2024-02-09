@@ -17,6 +17,7 @@ use App\Http\Controllers\FrontendController;
 
 
 Route::get('/', [FrontendController::class, 'index']);
+Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.login');
 
 
 

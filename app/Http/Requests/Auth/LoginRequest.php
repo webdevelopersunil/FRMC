@@ -48,7 +48,7 @@ class LoginRequest extends FormRequest
 
         $cpfNo      =   $this->input('cpfNo');
         $password   =   $this->input('password');
-
+        dd($cpfNo);
         $user       =   User::where('cpfNo', $cpfNo)->first();
         
         if($user == null){

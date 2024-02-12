@@ -12,8 +12,9 @@ class FrontendController extends Controller{
         return redirect('login');
     }
 
-    public function userLogin(){
+    public function complainantLogin(){
 
         return view('auth.user_login');
     }
+
 }

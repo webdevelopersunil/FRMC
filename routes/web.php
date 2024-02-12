@@ -21,6 +21,9 @@ Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.
 
 
 
+Route::get('complainant/login', [FrontendController::class, 'complainantLogin'])->name('complainant.login');
+
+
 Route::get('/dashboard', function () {
     return view('nodal.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -44,5 +44,10 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        <div class="text-center mt-4 font-weight-light">
+            Login as a  <a href="{{ route('complainant.login') }}" class="text-primary">Complainant</a>
+        </div>
+
     </form>
 </x-guest-layout>

@@ -52,19 +52,18 @@ class LoginRequest extends FormRequest
         $user       =   User::where('cpfNo', $cpfNo)->first();
         
         if($user == null){
-            echo "1";
+            
             $connection = Container::getConnection('default');
             $record = $connection->query()->findBy('samaccountname', $cpfNo );
 
             if(!$record) {
-                
                 // User not found, throw validation exception
                 throw ValidationException::withMessages([
                     'cpfno' => trans('auth.user_not_found'),
                 ]);
 
             }else{
-                echo "3";
+                
                 $user = User::create([
                     'name' => $record['name'][0],
                     'email' => $record['mail'][0],

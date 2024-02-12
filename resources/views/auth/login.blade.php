@@ -46,7 +46,7 @@
         </div>
 
         <div class="text-center mt-4 font-weight-light">
-            Login as a  <a href="{{ route('complainant.login') }}" class="text-primary">Complainant</a>
+            Login as a  <a href="{{ route('complainant.login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Complainant</a>
         </div>
 
     </form>

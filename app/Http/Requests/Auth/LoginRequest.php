@@ -30,11 +30,19 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            // 'email' => ['required', 'string', 'email'],
-            'cpfNo' => ['required', 'string'],
-            'password' => ['required', 'string'],
+        $rules = [
+            'password' => 'required|string',
         ];
+
+        if ($this->has('cpfNo')) {
+            // If 'cpfNo' is present, validate 'cpfNo' and 'password'
+            $rules['cpfNo'] = 'required|string';
+        } elseif ($this->has('phone')) {
+            // If 'phone' is present, validate 'phone' and 'password'
+            $rules['phone'] = 'required|string';
+        }
+
+        return $rules;
     }
 
     /**
@@ -47,42 +55,55 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $cpfNo      =   $this->input('cpfNo');
+        $phone      =   $this->input('phone');
         $password   =   $this->input('password');
-        
-        $user       =   User::where('cpfNo', $cpfNo)->first();
-        
-        if($user == null){
-            
-            $connection = Container::getConnection('default');
-            $record = $connection->query()->findBy('samaccountname', $cpfNo );
 
-            if(!$record) {
-                // User not found, throw validation exception
+        if( $this->input('cpfNo') && $this->input('cpfNo') != NULL ){
+
+
+                $user       =   User::where('cpfNo', $cpfNo)->first();
+                if($user == null){
+                    $connection = Container::getConnection('default');
+                    $record = $connection->query()->findBy('samaccountname', $cpfNo );
+                    if(!$record) {
+                        // User not found, throw validation exception
+                        throw ValidationException::withMessages([
+                            'cpfno' => trans('auth.user_not_found'),
+                        ]);
+                    }else{
+                        $user = User::create([
+                            'name' => $record['name'][0],
+                            'email' => $record['mail'][0],
+                            'cpfNo' => $cpfNo,
+                            // 'username' => $request->username,
+                            'password' => Hash::make($password),
+                        ]);
+                    }
+                }
+
+                // Attempt LDAP authentication
+                if (! Auth::attempt(['cpfno' => $cpfNo, 'password' => $password])) {
+                    RateLimiter::hit($this->throttleKey());
+
+                    throw ValidationException::withMessages([
+                        'cpfNo' => trans('auth.failed'),
+                    ]);
+                }
+
+
+        }else if( $this->input('phone') != NULL ){
+
+            // User authentication with phone
+            if (! Auth::attempt(['phone' => $phone, 'password' => $password])) {
+                RateLimiter::hit($this->throttleKey());
+
                 throw ValidationException::withMessages([
-                    'cpfno' => trans('auth.user_not_found'),
-                ]);
-
-            }else{
-                
-                $user = User::create([
-                    'name' => $record['name'][0],
-                    'email' => $record['mail'][0],
-                    'cpfNo' => $cpfNo,
-                    // 'username' => $request->username,
-                    'password' => Hash::make($password),
+                    'phone' => trans('auth.failed'),
                 ]);
             }
+
         }
-
-        // Attempt LDAP authentication
-        if (! Auth::attempt(['cpfno' => $cpfNo, 'password' => $password])) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'cpfno' => trans('auth.failed'),
-            ]);
-        }
-
+        
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -102,7 +123,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'phone' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),

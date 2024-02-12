@@ -23,15 +23,9 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'update complain']);
         Permission::create(['name' => 'view complain']);
 
-        // Permission::create(['name' => 'edit nodal']);
-        // Permission::create(['name' => 'delete nodal']);
-        // Permission::create(['name' => 'view nodal']);
-        // Permission::create(['name' => 'update nodal']);
-
-        // Permission::create(['name' => 'edit fco']);
-        // Permission::create(['name' => 'delete fco']);
-        // Permission::create(['name' => 'view fco']);
-        // Permission::create(['name' => 'update fco']);
+        Permission::create(['name' => 'user dashboard']);
+        Permission::create(['name' => 'nodal dashboard']);
+        Permission::create(['name' => 'fco dashboard']);
 
         // this can be done as separate statements
         $role = Role::create(['name' => 'user'])->givePermissionTo('create complain', 'view complain');

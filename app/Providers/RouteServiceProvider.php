@@ -19,6 +19,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
 
+    public const USER = '/user-dashboard';
+
+    public const NODAL = '/nodal-dashboard';
+
+    public const FCO = '/fco-dashboard';
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */

@@ -45,7 +45,7 @@ class UsersSeeder extends Seeder
             [
                 'name'      => 'FCO Officer',
                 'email'     => 'fco@gmail.com',
-                'password'  =>  Hash::make('Welcome@123'),
+                'password'  =>  Hash::make('fco@123'),
                 'username'  => 'fco_officer',
                 'cpfNo'     => 'A004629',
                 'address'   => 'Address of the nodel officer',

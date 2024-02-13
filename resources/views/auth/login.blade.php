@@ -8,7 +8,7 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="cpfNo" :value="__('CpfNo')" />
-            <x-text-input id="cpfNo" class="block mt-1 w-full" type="text" name="cpfNo" :value="old('cpfNo') ? old('cpfNo') : 'A004628'" required autofocus autocomplete="cpfNo" />
+            <x-text-input id="cpfNo" class="block mt-1 w-full" type="text" name="cpfNo" :value="old('cpfNo') ? old('cpfNo') : 'A004629'" required autofocus autocomplete="cpfNo" />
             <x-input-error :messages="$errors->get('cpfNo')" class="mt-2" />
         </div>
 
@@ -19,7 +19,7 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            value="Welcome@12"
+                            value="fco@123"
                             required autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -48,6 +48,6 @@
         <div class="text-center mt-4 font-weight-light">
             Login as a  <a href="{{ route('complainant.login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Complainant</a>
         </div>
-
+ 
     </form>
 </x-guest-layout>

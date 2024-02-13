@@ -21,7 +21,14 @@
       <li class="nav-item {{ $currentRoute == 'user.complaints' ? 'active' : '' }} {{ $currentRoute == 'user.complaint.edit' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('user.complaints') }}">
           <i class="icon-grid menu-icon"></i>
-          <span class="menu-title">User Complaints List</span>
+            <span class="menu-title">User Complaints List</span>
+        </a>
+      </li>
+
+      <li class="nav-item {{ $currentRoute == 'profile.edit' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('profile.edit') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">User Profile</span>
         </a>
       </li>
       

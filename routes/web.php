@@ -46,6 +46,7 @@ Route::middleware(['auth', 'verified', 'role:nodal'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:fco'])->group(function () {
     Route::get('/fco-dashboard', [FcoDashboardController::class, 'index'] )->name('fco.dashboard');
     Route::get('/fco-complaints/list', [FcoComplainantController::class, 'index'] )->name('fco.complaints');
+    Route::get('/fco-complaints/edit', [FcoComplainantController::class, 'edit'] )->name('fco.complaint.edit');
 });
 
 

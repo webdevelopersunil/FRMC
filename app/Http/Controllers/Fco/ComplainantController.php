@@ -12,4 +12,10 @@ class ComplainantController extends Controller
 
         return view('fco.list');
     }
+
+    public function edit(Request $request){
+
+        return view('fco.edit');
+    }
+
 }

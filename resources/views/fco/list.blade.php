@@ -23,16 +23,16 @@
                             <table class="table table-striped">
                             <thead>
                                 <tr>
-                                <th> #Index </th>
-                                <th> Complaint No. </th>
-                                <th> Date of Complaint </th>
-                                <th> Complaint Against </th>
-                                <th> Department/Section </th>
-                                <th> ONGC Work Centre </th>
-                                <th>Nodel Officer</th> 
-                                <th>Work Location</th> 
-                                <th>Complaint Status</th> 
-                                <th> Action </th>
+                                    <th> #Index </th>
+                                    <th> Complaint No. </th>
+                                    <th> Date of Complaint </th>
+                                    <th> Complaint Against </th>
+                                    <th> Department/Section </th>
+                                    <th> ONGC Work Centre </th>
+                                    <th>Nodel Officer</th> 
+                                    <th>Work Location</th> 
+                                    <th>Complaint Status</th> 
+                                    <th> Action </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,7 +47,7 @@
                                     <td> Work Location </td> 
                                     <td> Complaint Status </td>
                                     <td>
-                                    <a href="">Edit</a> | View
+                                        <a href="{{ route('fco.complaint.edit') }}">Edit</a> | View
                                     </td>
                                 </tr>            
                             </tbody>

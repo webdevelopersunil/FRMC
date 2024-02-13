@@ -6,20 +6,68 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
 
   <ul class="nav">
+
+
+    <!-- Nodal Users Sidebar Menus -->
+    @if(auth()->user()->hasRole('nodal'))
+
+      <li class="nav-item ">
+        <a class="nav-link" href="{{ route('user.dashboard') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">User Dashboard</span>
+        </a>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" href="{{ route('user.complaints') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">User Complaints List</span>
+        </a>
+      </li>
+      
+    @endif
+
     
-    <li class="nav-item {{ $currentRoute == 'dashboard' ? 'active' : '' }} ">
-      <a class="nav-link" href="{{ route('dashboard') }}">
-        <i class="icon-grid menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
-      </a>
-    </li>
 
-    <li class="nav-item  ">
-      <a class="nav-link" href="{{ route('nodal.complaints') }}">
-        <i class="icon-grid menu-icon"></i>
-        <span class="menu-title">Complaints List</span>
-      </a>
-    </li>
+    <!-- Nodal Nodal Sidebar Menus -->
+    @if(auth()->user()->hasRole('nodal'))
 
+      <li class="nav-item  ">
+        <a class="nav-link" href="{{ route('nodal.dashboard') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">Nodal Dashboard</span>
+        </a>
+      </li>
+
+      <li class="nav-item  ">
+        <a class="nav-link" href="{{ route('nodal.complaints') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">Nodal Complaints List</span>
+        </a>
+      </li>
+
+    @endif
+
+
+
+    <!-- Nodal FCO Sidebar Menus -->
+    @if(auth()->user()->hasRole('nodal'))
+
+      <li class="nav-item ">
+        <a class="nav-link" href="{{ route('fco.dashboard') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">FCO Dashboard</span>
+        </a>
+      </li>
+
+      <li class="nav-item  ">
+        <a class="nav-link" href="{{ route('fco.complaints') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">FCO Complaints List</span>
+        </a>
+      </li>
+
+    @endif
+    
   </ul>
 </nav>

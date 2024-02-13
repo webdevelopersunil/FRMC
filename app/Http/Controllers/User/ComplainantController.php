@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Fco;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class ComplainantController extends Controller
 {
-
+    
     public function index(Request $request){
 
-        return view('fco.dashboard');
+        return view('user.list');
     }
-
 }

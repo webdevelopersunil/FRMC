@@ -5,29 +5,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Nodal Dashboard</title>
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- plugins:css -->
-        <!-- <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}"> -->
-        <!-- <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}"> -->
-        <!-- endinject -->
-        <!-- Plugin css for this page -->
-        <!-- <link rel="stylesheet" href="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}"> -->
-        <!-- <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}"> -->
-        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/select.dataTables.min.css') }}"> -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        
+        <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
+        
         <!-- endinject -->
-        <!-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" /> -->
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
         
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <!-- Nodal -->
-        <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
@@ -44,7 +29,6 @@
     <div class="container-fluid page-body-wrapper">
 
       <!-- partial:partials/_settings-panel.html -->
-        @include('includes/settings')
       <!-- partial -->
 
       <!-- partial:partials/_sidebar.html -->
@@ -79,6 +63,11 @@
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+
+
+
+
+
   <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
   <script src="{{ asset('assets/js/template.js') }}"></script>
   <script src="{{ asset('assets/js/settings.js') }}"></script>

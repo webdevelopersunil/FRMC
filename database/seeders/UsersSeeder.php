@@ -21,7 +21,7 @@ class UsersSeeder extends Seeder
             [
                 'name'      => 'User',
                 'email'     => 'user@gmail.com',
-                'password'  =>  Hash::make('Welcome@123'),
+                'password'  =>  Hash::make('user@123'),
                 'username'  => 'user',
                 // 'cpfNo'     => 'A004629',
                 'address'   => 'Address of the nodel officer',
@@ -33,7 +33,7 @@ class UsersSeeder extends Seeder
             [
                 'name'      => 'Nodal Officer',
                 'email'     => 'nodal@gmail.com',
-                'password'  =>  Hash::make('Welcome@123'),
+                'password'  =>  Hash::make('nodal@123'),
                 'username'  => 'nodal_officer',
                 'cpfNo'     => 'A004628',
                 'address'   => 'Address of the nodel officer',

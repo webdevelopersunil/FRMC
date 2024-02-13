@@ -107,7 +107,7 @@
                             <td> Visible to all users </td>
                             <td> Status </td>
                             <td>
-                              <a href="">Edit</a>
+                              <a href="{{ route('user.complaint.edit') }}">Edit</a>
                             </td>
                           </tr>
                           </tbody>

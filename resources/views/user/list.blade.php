@@ -44,7 +44,7 @@
                                 <td> ONGC Centre Noida </td>
                                 <td> Visible to all users </td>
                                 <td>
-                                    <a href="">Edit</a> 
+                                    <a href="{{ route('user.complaint.edit') }}">Edit</a> 
                                 </td>
 
                                 </tr>

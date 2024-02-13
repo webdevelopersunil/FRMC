@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
 
     Route::get('/user-dashboard', [UserDashboardController::class, 'index'] )->name('user.dashboard');
     Route::get('/user-complaints/list', [UserComplainantController::class, 'index'] )->name('user.complaints');
+    Route::get('/user-complaints/edit', [UserComplainantController::class, 'edit'] )->name('user.complaint.edit');
 });
 
 

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Nodal\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,23 +16,22 @@ use App\Http\Controllers\FrontendController;
 |
 */
 
-
-Route::get('/', [FrontendController::class, 'index']);
-Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.login');
-
-
-
-Route::get('complainant/login', [FrontendController::class, 'complainantLogin'])->name('complainant.login');
+Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
+    
+});
 
 
-Route::get('/dashboard', function () {
-    return view('nodal.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified', 'role:nodal'])->group(function () {
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'] )->name('dashboard');
+    Route::get('/complaints/list', [DashboardController::class, 'index'] )->name('nodal.complaints');
 
-Route::get('/complaints/list', function () {
-    return view('nodal.list');
-})->middleware(['auth', 'verified'])->name('nodal.complaints');
+});
 
+
+Route::middleware(['auth', 'verified', 'role:fco'])->group(function () {
+    
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -39,5 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.login');
+Route::get('complainant/login', [FrontendController::class, 'complainantLogin'])->name('complainant.login');
 
 require __DIR__.'/auth.php';

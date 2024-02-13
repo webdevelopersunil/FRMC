@@ -1,13 +1,14 @@
 <x-app-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+  <x-auth-session-status class="mb-4" :status="session('status')" />
     
-    <div class="content-wrapper">
+        
+  <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Nodal Dashboard</h3>
+                  <h3 class="font-weight-bold">FCO Officer Dashboard</h3>
                   <!-- <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6> -->
                 </div>
                 <div class="col-12 col-xl-4">
@@ -28,8 +29,7 @@
               </div>
             </div>
           </div>
-
-
+          
           <div class="row">
             <div class="col-md-12 grid-margin transparent">
               <div class="row">
@@ -45,8 +45,8 @@
                 <div class="col-md-3 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
-                      <p class="mb-4">--</p>
-                      <p class="fs-30 mb-2">--</p>
+                      <p class="mb-4">Total Assigned Complaint</p>
+                      <p class="fs-30 mb-2">1</p>
                       <p>--</p>
                     </div>
                   </div>
@@ -73,37 +73,42 @@
               </div>
             </div>
           </div>
-          
 
           <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
+          <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Top Recent</p>
+                  <p class="card-title">Recent Assigned Complaints</p>
                   <div class="row">
                     <div class="col-12">
                       <div class="table-responsive">
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
-                          <tr>
+                            <tr>
                             <th> #Index </th>
                             <th> Complaint No. </th>
                             <th> Date of Complaint </th>
                             <th> Complaint Against </th>
                             <th> Department/Section </th>
                             <th> ONGC Work Centre </th>
+                            <th>Nodel Officer</th> 
+                            <th>Work Location</th> 
+                            <th>Complaint Status</th> 
                             <th> Action </th>
-                          </tr>
+                            </tr>
                           </thead>
 
                           <tbody>
-                            <tr>
+                            <tr class="odd">
                               <td> 1 </td>
                               <td> CM001NO65 </td>
                               <td> 02-Feb-2024 </td>
                               <td> User1, User2 </td>
                               <td> Department/Section 1 </td>
                               <td> ONGC Centre Noida </td>
+                              <td> Nodel Officer </td> 
+                              <td> Work Location </td> 
+                              <td> Complaint Status </td>
                               <td>
                                 <a href="">Edit</a> | View
                               </td>
@@ -118,7 +123,8 @@
                 </div>
               </div>
             </div>
-        </div>
+          </div>
 
+        <!-- content-wrapper ends -->  
     
 </x-app-layout>

@@ -12,4 +12,10 @@ class ComplainantController extends Controller
 
         return view('nodal.list');
     }
+
+    public function edit(Request $request){
+
+        return view('nodal.edit');
+    }
+
 }

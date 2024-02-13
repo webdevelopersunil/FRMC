@@ -5,6 +5,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Nodal Dashboard</title>
+
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
         <!-- plugins:css -->
         <!-- <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}"> -->
         <!-- <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}"> -->
@@ -15,15 +18,20 @@
         <!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/select.dataTables.min.css') }}"> -->
         <!-- End plugin css for this page -->
         <!-- inject:css -->
+        
         <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
         <!-- endinject -->
         <!-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" /> -->
         
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <!-- Nodal -->
+        <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
+
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
     </head>
 
     <body>
@@ -80,6 +88,16 @@
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
   <script src="{{ asset('assets/js/Chart.roundedBarCharts.js') }}"></script>
   <!-- End custom js for this page-->
+
+
+
+  <!-- Nodal -->
+  <script src="{{ asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+  <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{ asset('assets/js/file-upload.js') }}"></script>
+  <script src="{{ asset('assets/js/typeahead.js') }}"></script>
+  <script src="{{ asset('assets/js/select2.js') }}"></script>
+
 </body>
 
 </html>

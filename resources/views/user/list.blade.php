@@ -14,7 +14,6 @@
                             <!-- Add class <code>.table-striped</code> -->
                         </p>
 
-
                         <div class="template-demo">
                             <button onclick="window.location='#'"  type="button" class="btn btn-primary"> Register Complainant </button>
                         </div>

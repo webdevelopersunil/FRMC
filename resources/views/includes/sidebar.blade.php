@@ -9,7 +9,7 @@
 
 
     <!-- Nodal Users Sidebar Menus -->
-    @if(auth()->user()->hasRole('nodal'))
+    @if(auth()->user()->hasRole('user'))
 
       <li class="nav-item ">
         <a class="nav-link" href="{{ route('user.dashboard') }}">
@@ -51,7 +51,7 @@
 
 
     <!-- Nodal FCO Sidebar Menus -->
-    @if(auth()->user()->hasRole('nodal'))
+    @if(auth()->user()->hasRole('fco'))
 
       <li class="nav-item ">
         <a class="nav-link" href="{{ route('fco.dashboard') }}">

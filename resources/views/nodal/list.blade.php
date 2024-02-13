@@ -31,7 +31,7 @@
                                     <td> Department/Section 1 </td>
                                     <td> ONGC Centre Noida </td>
                                     <td>
-                                        <a href="">Edit</a> | View
+                                        <a href="{{ route('nodal.complaint.edit') }}">Edit</a> | View
                                     </td>
                                     </tr>
                                 </tbody>

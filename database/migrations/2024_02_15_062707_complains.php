@@ -15,7 +15,7 @@ return new class extends Migration
 
             $table->id();
             $table->string('complain_no')->unique()->required();
-            $table->string('complainant_id')->nullable();
+            $table->bigInteger('complainant_id')->required();
             $table->text('description');
             $table->string('work_centre')->required();
             $table->string('department_section')->required();

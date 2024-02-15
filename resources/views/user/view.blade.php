@@ -11,6 +11,11 @@
                 <h4 class="card-title">Complainant Detail</h4>
                 <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
 
+                <div class="template-demo">
+                    <button onclick="window.location='{{ route('user.complaints') }}'"  type="button" class="btn btn-primary"> Go Back </button>
+                </div>
+                <br>
+
                 <form class="forms-sample" action="" method="" >
                     
                   <div class="row">

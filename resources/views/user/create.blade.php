@@ -10,8 +10,12 @@
               <div class="card-body">
                 <h4 class="card-title">Registration of Complainant</h4>
                 <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
+                <div class="template-demo">
+                    <button onclick="window.location='{{ route('user.complaints') }}'"  type="button" class="btn btn-primary"> Go Back </button>
+                </div>
+                <br>
 
-                <form class="forms-sample" action="{{ route('user.complaint.store') }}" method="post" >
+                <form class="forms-sample" action="{{ route('user.complaint.store') }}" method="post" enctype="multipart/form-data"> 
                     @csrf
 
                     @if($errors->any())
@@ -116,13 +120,13 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Document</label>
-                                <input type="file" class="form-control" name="document[]" id="exampleInputUsername1" placeholder="file">
+                                <input type="file" class="form-control" name="document" id="exampleInputUsername1" placeholder="file">
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Additional Detail</label>
-                                <textarea name="additional_detail[]" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
+                                <textarea name="additional_detail" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -157,8 +161,8 @@
                 otherInput.disabled = true;
             }
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
+// Need to remove
+        document.addEventListener_old('DOMContentLoaded', function() {
           document.querySelector('.addRowBtn').addEventListener('click', function() {
               var row = document.querySelector('.dub-row');
               var newRow = row.cloneNode(true);

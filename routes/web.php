@@ -5,13 +5,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 
 use App\Http\Controllers\Nodal\DashboardController as NodalDashboardController;
-use App\Http\Controllers\Nodal\ComplainantController as NodalComplainantController;
+use App\Http\Controllers\Nodal\ComplainantController as NodalComplaintController;
 
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
-use App\Http\Controllers\User\ComplainantController as UserComplainantController;
+use App\Http\Controllers\User\ComplaintController as UserComplaintController;
 
 use App\Http\Controllers\Fco\DashboardController as FcoDashboardController;
-use App\Http\Controllers\Fco\ComplainantController as FcoComplainantController;
+use App\Http\Controllers\Fco\ComplainantController as FcoComplaintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +28,12 @@ use App\Http\Controllers\Fco\ComplainantController as FcoComplainantController;
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
 
     Route::get('/user-dashboard', [UserDashboardController::class, 'index'] )->name('user.dashboard');
-    Route::get('/user-complaints/list', [UserComplainantController::class, 'index'] )->name('user.complaints');
-    Route::get('/user-complaints/edit', [UserComplainantController::class, 'edit'] )->name('user.complaint.edit');
+    Route::get('/user-complaints/list', [UserComplaintController::class, 'index'] )->name('user.complaints');
+    Route::get('/user-complaints/edit', [UserComplaintController::class, 'edit'] )->name('user.complaint.edit');
+    Route::get('/user-complaint/create', [UserComplaintController::class, 'create'] )->name('user.complaint.create');
+    Route::post('/user-complaint/store', [UserComplaintController::class, 'store'] )->name('user.complaint.store');
+
+    Route::get('/user-complaint/view/{complain_id}', [UserComplaintController::class, 'view'] )->name('user.complaint.view');
 });
 
 
@@ -37,8 +41,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:nodal'])->group(function () {
     
     Route::get('/nodal-dashboard', [NodalDashboardController::class, 'index'] )->name('nodal.dashboard');
-    Route::get('/nodal-complaints/list', [NodalComplainantController::class, 'index'] )->name('nodal.complaints');
-    Route::get('/nodal-complaints/edit', [NodalComplainantController::class, 'edit'] )->name('nodal.complaint.edit');
+    Route::get('/nodal-complaints/list', [NodalComplaintController::class, 'index'] )->name('nodal.complaints');
+    Route::get('/nodal-complaints/edit', [NodalComplaintController::class, 'edit'] )->name('nodal.complaint.edit');
 
 });
 
@@ -46,8 +50,8 @@ Route::middleware(['auth', 'verified', 'role:nodal'])->group(function () {
 // FCO Officer Routes
 Route::middleware(['auth', 'verified', 'role:fco'])->group(function () {
     Route::get('/fco-dashboard', [FcoDashboardController::class, 'index'] )->name('fco.dashboard');
-    Route::get('/fco-complaints/list', [FcoComplainantController::class, 'index'] )->name('fco.complaints');
-    Route::get('/fco-complaints/edit', [FcoComplainantController::class, 'edit'] )->name('fco.complaint.edit');
+    Route::get('/fco-complaints/list', [FcoComplaintController::class, 'index'] )->name('fco.complaints');
+    Route::get('/fco-complaints/edit', [FcoComplaintController::class, 'edit'] )->name('fco.complaint.edit');
 });
 
 

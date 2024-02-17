@@ -23,16 +23,15 @@ class ComplaintController extends Controller{
     public function create(Request $request){
 
         // $complainNo = Complain::generateUniqueComplainNo();
-        
+
         $complainNo     =   'CMPL000'.rand(10,1000000);
         
         return view('user.create', compact('complainNo'));
     }
 
     public function store(Request $request){
-        // dd($request->all());
+        
         $attributes = request()->validate([
-
             'complain_no'               => ['required'],
             'description'               => ['required'],
             'department_section'        => ['required'],

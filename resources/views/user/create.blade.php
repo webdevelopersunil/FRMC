@@ -2,76 +2,54 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-      
       <div class="content-wrapper">
         <div class="row">
           <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">New Complaint</h4>
-                <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
-                {{-- <div class="template-demo">
-                    <button onclick="window.location='{{ route('user.complaints') }}'"  type="button" class="btn btn-primary"> Go Back </button>
-                </div> --}}
-                <br>
+                
+                <!-- Error Section Start Here 'message-block' -->
+                    @include('includes/message-block')
+                <!-- Error Section Ends Here -->
 
                 <form class="forms-sample" action="{{ route('user.complaint.store') }}" method="post" enctype="multipart/form-data"> 
-                    @csrf
 
-                    @if($errors->any())
-                        <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
-                            <span class="alert-text text-white">
-                            {{$errors->first()}}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
-                    @if(session('success'))
-                        <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
-                            <span class="alert-text text-white">
-                            {{ session('success') }}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
-                    @if(session('error'))
-                        <div class="m-3  alert alert-primary alert-dismissible fade show" id="alert-success" role="alert">
-                            <span class="alert-text text-white">
-                            {{ session('error') }}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
+                    @csrf
 
                   <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Complaint No.</label>
-                              <input type="text" name="complain_no" class="form-control" readonly="TRUE" value="{{$complainNo}}" id="exampleInputUsername1">
+                              <input type="text" name="complain_no" class="form-control" readonly="TRUE" value="{{$complainNo}}" id="exampleInputUsername1" required >
                           </div>
                       </div>
-                    <!-- <div class="col-md-6">
-                      <div class="form-group">
-                          <label for="exampleInputUsername1">Date of Complaint</label>
-                          <input type="date" class="form-control" id="exampleInputUsername1">
-                      </div>
-                    </div> -->
                   </div>
 
                   <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Description of Complaint</label>
-                              <textarea name="description" class="form-control" id="exampleInputUsername1" cols="30" rows="4">Description of Complaint</textarea>
+                              <textarea name="description" class="form-control" id="exampleInputUsername1" required cols="30" rows="4">Description of Complaint</textarea>
                           </div>
                     </div>
                   </div>
 
                   <div class="row">
-                      <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">ONGC Work Centre</label>
+                            <select class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
+                                <option selected disabled >Please Select</option>
+                                <option value="Delhi" >Delhi</option>
+                                <option value="Dehradun" >Dehradun</option>
+                                <option value="Mumbai" >Mumbai</option>
+                                <option value="Ahmedabad" >Ahmedabad</option>
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputUsername1">Department/Section</label>
                             <select onchange="toggleOtherInput()" name="department_section" class="form-control form-control-lg" id="departmentSelect" required>
@@ -84,7 +62,7 @@
                             </select>
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputUsername1"> Department (If clicked Others) </label>
                             <input type="text" name="department_section_other" id="others-show" disabled class="form-control" id="exampleInputUsername1" placeholder="Department/Section" required>
@@ -93,25 +71,15 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputUsername1">Against Whom</label>
                             <input type="text" name="against_persons" class="form-control" value="user 1, User 2" id="exampleInputUsername1" placeholder="Against Users names" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">ONGC Work Centre</label>
-                            <select class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
-                                <option selected disabled >Please Select</option>  
-                                <option value="Delhi" >Delhi</option>
-                                <option value="Dehradun" >Dehradun</option>
-                                <option value="Mumbai" >Mumbai</option>
-                                <option value="Ahmedabad" >Ahmedabad</option>
-                            </select>
-                        </div>
-                      </div>
                   </div>
+
+                  <br>
 
                   <!-- Additional Input -->
                   

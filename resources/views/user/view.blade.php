@@ -2,7 +2,6 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-      
       <div class="content-wrapper">
         <div class="row">
           <div class="col-md-12 grid-margin stretch-card">
@@ -11,13 +10,12 @@
                 <h4 class="card-title">Complainant Detail</h4>
                 <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
 
-                <div class="template-demo">
-                    <button onclick="window.location='{{ route('user.complaints') }}'"  type="button" class="btn btn-primary"> Go Back </button>
+                <div class="d-flex justify-content-end mb-3">
+                    <a class="btn btn-primary" href="{{ route('user.complaints') }}"> Go Back</a>
                 </div>
+
                 <br>
 
-                <form class="forms-sample" action="" method="" >
-                    
                   <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
@@ -33,6 +31,13 @@
                     </div> -->
                   </div>
 
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="exampleInputUsername1">ONGC Work Centre</label>
+                          <input type="text" disabled name="against_persons" class="form-control" value="{{ $complain->work_centre }}">
+                      </div>
+                    </div>
+
                   <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
@@ -43,14 +48,6 @@
                   </div>
 
                   <div class="row">
-                      <!-- <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Department/Section</label>
-                            <select disabled onchange="toggleOtherInput()" name="department_section" class="form-control form-control-lg" id="departmentSelect" required>
-                              <option selected >{{ $complain->department_section }}</option>
-                            </select>
-                        </div>
-                      </div> -->
                       <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputUsername1"> Department/Section </label>
@@ -60,19 +57,14 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputUsername1">Against Whom</label>
                             <input type="text" disabled name="against_persons" class="form-control" value="{{$complain->against_persons}}" id="exampleInputUsername1" placeholder="Against Users names" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">ONGC Work Centre</label>
-                            <input type="text" disabled name="against_persons" class="form-control" value="{{ $complain->work_centre }}">
-                        </div>
-                      </div>
                   </div>
+
 
                   <br>
                   <!-- Additional Input -->
@@ -96,8 +88,9 @@
                           </div>
                       </div>
                     </div>
+
                   @endforeach
-                </form>
+
               </div>
             </div>
           </div>

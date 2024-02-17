@@ -33,13 +33,11 @@ class Complain extends Model
         'department_section',
     ];
 
-    public static function generateUniqueComplainNo($length = 10)
-    {
-        do {
-            $complain_no = Str::random($length);
-        } while (static::where('complain_no', $complain_no)->exists());
+    public static function getComplainNo(){
 
-        return $complain_no;
+        $lastInsertedId =   self::latest()->first('id');
+
+        return 'CMPL0000' . str_pad(rand(0, 99999), 4, '0', STR_PAD_LEFT) . ($lastInsertedId ? $lastInsertedId->id : '0');
     }
     
 }

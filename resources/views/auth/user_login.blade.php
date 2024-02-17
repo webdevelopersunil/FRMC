@@ -7,7 +7,7 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="phone" :value="__('Mobile Number')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone') ? old('phone') : '1212121214'" required autofocus autocomplete="phone" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone') ? old('phone') : '8259950403'" required autofocus autocomplete="phone" />
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
@@ -32,19 +32,25 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+        <div class="flex items-center justify-end mt-4 flex-column">
+            <button class="btn btn-primary w-100 mb-3">Login </button>
+			<a href="/login" class="btn btn-outline-primary w-100">
+				<span>← Login as Admin </span>
+			</a>
+        </div>
+		
+		@if (Route::has('password.request'))
+            <p class="mt-3 text-center">
+				<a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
-            @endif
+			</p>
+        @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
+            
         <div class="text-center mt-4 font-weight-light">
-            Not <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Registered yet?</a>
+            Not yet registered ? <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Click here to Register</a>
         </div>
+		
     </form>
 </x-guest-layout>

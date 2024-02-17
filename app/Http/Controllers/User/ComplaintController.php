@@ -52,13 +52,20 @@ class ComplaintController extends Controller{
             $complain->public_status        =   $request->public_status;
             $complain->save();
 
+            // if ($request->hasFile('documents')) {
+            //     $folder = 'user-document';
+            //     foreach ($request->file('documents') as $file) {
+            //         $path = $file->store('uploads/'.$folder);
+            //         $fileNames[] = basename($path);
+            //     }
+            // }
 
             if ($request->hasFile('document')) {
-                // dd('d');
                 
                 $folder = 'user-document';
                 $path = $request->file('document')->store('uploads/'.$folder);
                 $fileName = basename($path);
+
                 $userAdditionalDetail                   =   new UserAdditionalDetail();
                 $userAdditionalDetail->complain_id      =   $complain->id;
                 $userAdditionalDetail->complainant_id   =   Auth::user()->id;
@@ -72,7 +79,7 @@ class ComplaintController extends Controller{
             return redirect()->route('user.complaints')->with('success', 'Complain has been created');
             
         } catch (\Exception $e) {
-            
+            // dd($e);
             // Handle exceptions
             return redirect()->route('user.complaint.create')->with('error', 'Failed to register complaint: '.$e->getMessage());
         }
@@ -82,8 +89,9 @@ class ComplaintController extends Controller{
     public function view($complain_id){
 
         $complain    =   Complain::find($complain_id);
+        $userAdditionalDetails  =   UserAdditionalDetail::all();
 
-        return view('user.view', compact('complain'));
+        return view('user.view', compact('complain','userAdditionalDetails'));
     }
     
     public function edit(Request $request){

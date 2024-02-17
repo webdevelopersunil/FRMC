@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_additional_details', function (Blueprint $table) {
-
+        Schema::create('nodal_additional_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('complain_id')->unsigned();
             $table->bigInteger('complainant_id')->unsigned();
             $table->text('description')->required();
-            $table->text('document_name')->required();
-            $table->text('directory')->required();
-            $table->text('mime_type')->required();
-            $table->rememberToken();
+            $table->text('file')->required();
+            $table->text('path')->required();
+            $table->text('mime')->required();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_additional_details');
+        Schema::dropIfExists('nodal_additional_details');
     }
 };

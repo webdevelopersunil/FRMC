@@ -7,8 +7,8 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="cpfNo" :value="__('CpfNo')" />
-            <x-text-input id="cpfNo" class="block mt-1 w-full" type="text" name="cpfNo" :value="old('cpfNo') ? old('cpfNo') : 'A004629'" required autofocus autocomplete="cpfNo" />
+            <x-input-label for="cpfNo" :value="__('CPF No')" />
+            <x-text-input id="cpfNo" class="block mt-1 w-full" type="text" name="cpfNo" :value="old('cpfNo') ? old('cpfNo') : 'nodal_officer'" required autofocus autocomplete="cpfNo" />
             <x-input-error :messages="$errors->get('cpfNo')" class="mt-2" />
         </div>
 
@@ -33,21 +33,22 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
+        <div class="flex items-center flex-column justify-end mt-4">
+
+			<button class="btn btn-primary w-100 mb-3">Login </button>
+			<a href="{{ route('complainant.login') }}" class="btn btn-outline-primary w-100">
+				<span>Login as Complainant → </span>
+			</a>
+			
+        </div>
+		
+		@if (Route::has('password.request'))
+			<p class="mt-3">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-
-        <div class="text-center mt-4 font-weight-light">
-            Login as a  <a href="{{ route('complainant.login') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Complainant</a>
-        </div>
+			</p>
+        @endif
  
     </form>
 </x-guest-layout>

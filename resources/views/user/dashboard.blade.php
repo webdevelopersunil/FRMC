@@ -77,7 +77,7 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Top Recent</p>
+                  <p class="card-title">Registered Complaints</p>
                   <div class="row">
                     <div class="col-12">
                       <div class="table-responsive">
@@ -127,6 +127,9 @@
                 </div>
               </div>
             </div>
-        </div>
+        
+			<a class="btn btn-primary" href="/user-complaint/create"> + New Complaint</a>
+			
+		</div>
     
 </x-app-layout>

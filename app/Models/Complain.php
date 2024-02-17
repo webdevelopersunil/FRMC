@@ -18,7 +18,8 @@ class Complain extends Model
         'work_centre',
         'department_section',
         'against_persons',
-        'public_status'
+        'public_status',
+        'complaint_status',
     ];
 
     /**

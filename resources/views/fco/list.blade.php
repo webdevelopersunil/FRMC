@@ -20,6 +20,35 @@
                         </div> -->
 
                         <div class="table-responsive">
+
+                        @if($errors->any())
+                        <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
+                            <span class="alert-text text-black">
+                            {{$errors->first()}}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('success'))
+                        <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
+                            <span class="alert-text text-black">
+                            {{ session('success') }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
+                            <span class="alert-text text-black">
+                            {{ session('error') }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
+                    
                             <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -29,27 +58,27 @@
                                     <th> Complaint Against </th>
                                     <th> Department/Section </th>
                                     <th> ONGC Work Centre </th>
-                                    <th>Nodel Officer</th> 
-                                    <th>Work Location</th> 
-                                    <th>Complaint Status</th> 
+                                    <th>Nodel Officer</th>
+                                    <th>Complaint Status</th>
                                     <th> Action </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td> 1 </td>
-                                    <td> CM001NO65 </td>
-                                    <td> 02-Feb-2024 </td>
-                                    <td> User1, User2 </td>
-                                    <td> Department/Section 1 </td>
-                                    <td> ONGC Centre Noida </td>
-                                    <td> Nodel Officer </td> 
-                                    <td> Work Location </td> 
+                                @foreach($lists as $index => $list)
+                                    <tr>
+                                    <td> {{ $index + 1 }} </td>
+                                    <td> {{ $list->complain_no }} </td>
+                                    <td> {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}</td>
+                                    <td> {{ $list->against_persons }} </td>
+                                    <td> {{ $list->department_section }} </td>
+                                    <td> {{ $list->work_centre }} </td>
+                                    <td> Nodel Officer </td>
                                     <td> Complaint Status </td>
                                     <td>
-                                        <a href="{{ route('fco.complaint.edit') }}">Edit</a> | View
+                                        <a href="{{ route('fco.complaint.view', $list->id) }}">View</a> | <a href="{{ route('fco.complaint.edit', $list->id) }}">Edit</a>
                                     </td>
-                                </tr>            
+                                    </tr>
+                                @endforeach           
                             </tbody>
                             </table>
                         </div>

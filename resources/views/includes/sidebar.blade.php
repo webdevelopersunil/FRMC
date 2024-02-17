@@ -19,9 +19,10 @@
       </li>
 
       <li class="nav-item {{ $currentRoute == 'user.complaints' ? 'active' : '' }} 
-      {{ $currentRoute == 'user.complaint.edit' ? 'active' : '' }}
-      {{ $currentRoute == 'user.complaint.create' ? 'active' : '' }}
-      {{ $currentRoute == 'user.complaint.view' ? 'active' : '' }}">
+        {{ $currentRoute == 'user.complaint.edit' ? 'active' : '' }}
+        {{ $currentRoute == 'user.complaint.create' ? 'active' : '' }}
+        {{ $currentRoute == 'user.complaint.view' ? 'active' : '' }} "
+        >
         <a class="nav-link" href="{{ route('user.complaints') }}">
           <i class="icon-grid menu-icon"></i>
             <span class="menu-title">User Complaints List</span>

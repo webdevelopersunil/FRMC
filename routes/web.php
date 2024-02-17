@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\CommonController;
 
 use App\Http\Controllers\Nodal\DashboardController as NodalDashboardController;
 use App\Http\Controllers\Nodal\ComplainantController as NodalComplaintController;
@@ -42,8 +43,12 @@ Route::middleware(['auth', 'verified', 'role:nodal'])->group(function () {
     
     Route::get('/nodal-dashboard', [NodalDashboardController::class, 'index'] )->name('nodal.dashboard');
     Route::get('/nodal-complaints/list', [NodalComplaintController::class, 'index'] )->name('nodal.complaints');
-    Route::get('/nodal-complaints/edit', [NodalComplaintController::class, 'edit'] )->name('nodal.complaint.edit');
+    Route::get('/nodal-complaints/edit/{list_id}', [NodalComplaintController::class, 'edit'] )->name('nodal.complaint.edit');
+    Route::post('/nodal-complaints/update', [NodalComplaintController::class, 'update'] )->name('nodal.complaint.update');
 
+    Route::get('/nodal-complaint/view/{complain_id}', [NodalComplaintController::class, 'view'] )->name('user.nodal.view');
+
+    Route::get('/storage/app/{path}/{file}', 'CommonController@preview')->name('storage.preview');
 });
 
 
@@ -51,10 +56,11 @@ Route::middleware(['auth', 'verified', 'role:nodal'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:fco'])->group(function () {
     Route::get('/fco-dashboard', [FcoDashboardController::class, 'index'] )->name('fco.dashboard');
     Route::get('/fco-complaints/list', [FcoComplaintController::class, 'index'] )->name('fco.complaints');
-    Route::get('/fco-complaints/edit', [FcoComplaintController::class, 'edit'] )->name('fco.complaint.edit');
+    Route::get('/fco-complaints/edit/{list_id}', [FcoComplaintController::class, 'edit'] )->name('fco.complaint.edit');
+    Route::get('/fco-complaints/view/{complain_id}', [FcoComplaintController::class, 'view'] )->name('fco.complaint.view');
+
+    Route::post('/fco-complaints/update', [FcoComplaintController::class, 'update'] )->name('fco.complaint.update');
 });
-
-
 
 
 Route::middleware('auth')->group(function () {

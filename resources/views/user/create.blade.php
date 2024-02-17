@@ -8,11 +8,11 @@
           <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Registration of Complainant</h4>
+                <h4 class="card-title">New Complaint</h4>
                 <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
-                <div class="template-demo">
+                {{-- <div class="template-demo">
                     <button onclick="window.location='{{ route('user.complaints') }}'"  type="button" class="btn btn-primary"> Go Back </button>
-                </div>
+                </div> --}}
                 <br>
 
                 <form class="forms-sample" action="{{ route('user.complaint.store') }}" method="post" enctype="multipart/form-data"> 
@@ -65,7 +65,7 @@
                       <div class="col-md-12">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Description of Complaint</label>
-                              <textarea name="description" class="form-control" id="exampleInputUsername1" cols="30" rows="4">Hellow</textarea>
+                              <textarea name="description" class="form-control" id="exampleInputUsername1" cols="30" rows="4">Description of Complaint</textarea>
                           </div>
                     </div>
                   </div>
@@ -86,7 +86,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputUsername1"> Department/Section </label>
+                            <label for="exampleInputUsername1"> Department (If clicked Others) </label>
                             <input type="text" name="department_section_other" id="others-show" disabled class="form-control" id="exampleInputUsername1" placeholder="Department/Section" required>
                         </div>
                       </div>
@@ -104,10 +104,10 @@
                             <label for="exampleInputUsername1">ONGC Work Centre</label>
                             <select class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
                                 <option selected disabled >Please Select</option>  
-                                <option value="Centre 1" >ONGC Work Centre 1</option>
-                                <option value="Centre 2" >ONGC Work Centre 2</option>
-                                <option value="Centre 3" >ONGC Work Centre 3</option>
-                                <option value="Centre 4" >ONGC Work Centre 4</option>
+                                <option value="Delhi" >Delhi</option>
+                                <option value="Dehradun" >Dehradun</option>
+                                <option value="Mumbai" >Mumbai</option>
+                                <option value="Ahmedabad" >Ahmedabad</option>
                             </select>
                         </div>
                       </div>
@@ -139,7 +139,7 @@
                   </div> 
 
                   <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                  <button class="btn btn-light">Cancel</button>
+                  <a class="btn btn-light" href="{{ route('user.complaints') }}">Cancel</a>
 
                 </form>
               </div>
@@ -162,7 +162,7 @@
             }
         }
 // Need to remove
-        document.addEventListener_old('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
           document.querySelector('.addRowBtn').addEventListener('click', function() {
               var row = document.querySelector('.dub-row');
               var newRow = row.cloneNode(true);

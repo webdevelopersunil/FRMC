@@ -37,7 +37,7 @@
                   <div class="card card-tale">
                     <div class="card-body">
                       <p class="mb-4">Total Complaint</p>
-                      <p class="fs-30 mb-2">1</p>
+                      <p class="fs-30 mb-2">{{ $total }}</p>
                       <p>--</p>
                     </div>
                   </div>
@@ -45,8 +45,8 @@
                 <div class="col-md-3 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
-                      <p class="mb-4">Total Assigned Complaint</p>
-                      <p class="fs-30 mb-2">1</p>
+                      <p class="mb-4"> --- </p>
+                      <p class="fs-30 mb-2">-</p>
                       <p>--</p>
                     </div>
                   </div>
@@ -85,34 +85,34 @@
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
                             <tr>
-                            <th> #Index </th>
-                            <th> Complaint No. </th>
-                            <th> Date of Complaint </th>
-                            <th> Complaint Against </th>
-                            <th> Department/Section </th>
-                            <th> ONGC Work Centre </th>
-                            <th>Nodel Officer</th> 
-                            <th>Work Location</th> 
-                            <th>Complaint Status</th> 
-                            <th> Action </th>
+                              <th> #Index </th>
+                              <th> Complaint No. </th>
+                              <th> Date of Complaint </th>
+                              <th> Complaint Against </th>
+                              <th> Department/Section </th>
+                              <th> ONGC Work Centre </th>
+                              <th>Nodel Officer</th>
+                              <th>Complaint Status</th>
+                              <th> Action </th>
                             </tr>
                           </thead>
 
                           <tbody>
-                            <tr class="odd">
-                              <td> 1 </td>
-                              <td> CM001NO65 </td>
-                              <td> 02-Feb-2024 </td>
-                              <td> User1, User2 </td>
-                              <td> Department/Section 1 </td>
-                              <td> ONGC Centre Noida </td>
-                              <td> Nodel Officer </td> 
-                              <td> Work Location </td> 
-                              <td> Complaint Status </td>
-                              <td>
-                                <a href="">Edit</a> | View
-                              </td>
-                            </tr>
+                                @foreach($lists as $index => $list)
+                                  <tr>
+                                    <td> {{ $index + 1 }} </td>
+                                    <td> {{ $list->complain_no }} </td>
+                                    <td> {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}</td>
+                                    <td> {{ $list->against_persons }} </td>
+                                    <td> {{ $list->department_section }} </td>
+                                    <td> {{ $list->work_centre }} </td>
+                                    <td> Nodel Officer </td>
+                                    <td> Complaint Status </td>
+                                    <td>
+                                    <a href="{{ route('fco.complaint.view', $list->id) }}">View</a> | <a href="{{ route('fco.complaint.edit', $list->id) }}">Edit</a>
+                                    </td>
+                                  </tr>
+                              @endforeach
                           </tbody>
 
                       </table>

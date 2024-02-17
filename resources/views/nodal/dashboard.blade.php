@@ -37,7 +37,7 @@
                   <div class="card card-tale">
                     <div class="card-body">
                       <p class="mb-4">Total Complaint</p>
-                      <p class="fs-30 mb-2">1</p>
+                      <p class="fs-30 mb-2">{{ $total }}</p>
                       <p>--</p>
                     </div>
                   </div>
@@ -85,32 +85,36 @@
                       <div class="table-responsive">
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
-                          <tr>
-                            <th> #Index </th>
-                            <th> Complaint No. </th>
-                            <th> Date of Complaint </th>
-                            <th> Complaint Against </th>
-                            <th> Department/Section </th>
-                            <th> ONGC Work Centre </th>
-                            <th> Action </th>
-                          </tr>
+                            <tr>
+                              <th> #Index </th>
+                              <th> Complaint No. </th>
+                              <th> Date of Complaint </th>
+                              <th> Complaint Against </th>
+                              <th> Department/Section </th>
+                              <th> ONGC Work Centre </th>
+                              <th> Public Detailed Status </th>
+                              <th> Action </th>
+                            </tr>
                           </thead>
 
                           <tbody>
-                            <tr>
-                              <td> 1 </td>
-                              <td> CM001NO65 </td>
-                              <td> 02-Feb-2024 </td>
-                              <td> User1, User2 </td>
-                              <td> Department/Section 1 </td>
-                              <td> ONGC Centre Noida </td>
-                              <td>
-                                <a href="">Edit</a> | View
-                              </td>
-                            </tr>
+                              @foreach($lists as $index => $list)
+                                <tr>
+                                  <td> {{ $index + 1 }} </td>
+                                  <td> {{ $list->complain_no }} </td>
+                                  <td> {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}</td>
+                                  <td> {{ $list->against_persons }} </td>
+                                  <td> {{ $list->department_section }} </td>
+                                  <td> {{ $list->work_centre }} </td>
+                                  <td>{{ $list->public_status ? $list->public_status : '---' }}</td>
+                                  <td>
+                                  <a href="{{ route('user.nodal.view', $list->id) }}">View</a> | <a href="{{ route('nodal.complaint.edit', $list->id) }}">Edit</a>
+                                  </td>
+                                </tr>
+                              @endforeach
                           </tbody>
-
                       </table>
+                      {{ $lists->links() }}
                       </div>
                     </div>
                   </div>

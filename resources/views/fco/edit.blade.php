@@ -10,56 +10,83 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Updation by the office of FCO</h4>
+
+                  @if($errors->any())
+                        <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
+                            <span class="alert-text text-black">
+                            {{$errors->first()}}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('success'))
+                        <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
+                            <span class="alert-text text-black">
+                            {{ session('success') }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
+                            <span class="alert-text text-black">
+                            {{ session('error') }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
                   
-                  <form class="forms-sample" action="" >
+                  <form class="forms-sample" action="{{ route('fco.complaint.update') }}" method="post">
+
+                      @csrf
+                    <input type="hidden" value="{{$list_id}}" name="id">
+                  
                     <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Nodel Officer</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>Officers 1</option>
-                                <option>Officers 2</option>
-                              </select>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Work Location</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>Location 1</option>
-                                <option>Location 2</option>
-                              </select>
-                          </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Complaint Status</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>With Nodal Officer</option>
-                                <option>With FCO</option>
-                                <option>Under FRMC deliberations for Closure/Investigation</option>
-                                <option>Under Investigation</option>
-                                <option value="">Fraud Not Established after FRMC Deliberation</option>
-                                
+                              <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="nodal_officer">
+                                <option value="Nodal Officer" selected >Nodal Officer</option>
                               </select>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Work Centre</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>Centre 1</option>
-                                <option>Centre 2</option>
+                              <select class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
+                                <option selected disabled >Please Select</option>  
+                                <option value="Delhi" {{ $complain->work_centre == "Delhi" ? 'selected' : '' }}>Delhi</option>
+                                <option value="Dehradun" {{ $complain->work_centre == "Dehradun" ? 'selected' : '' }} >Dehradun</option>
+                                <option value="Mumbai"{{ $complain->work_centre == "Mumbai" ? 'selected' : '' }} >Mumbai</option>
+                                <option value="Ahmedabad" {{ $complain->work_centre == "Ahmedabad" ? 'selected' : '' }} >Ahmedabad</option>
                               </select>
                           </div>
                         </div>
                     </div>
 
+
                     <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Complaint Status</label>
+                              <select name="complaint_status" class="form-control form-control-lg" id="exampleFormControlSelect1" >
+                                <option {{ $complain->complaint_status == "With Nodal Officer" ? 'selected' : '' }} value="With Nodal Officer" >With Nodal Officer</option>
+                                <option {{ $complain->complaint_status == "With FCO" ? 'selected' : '' }} value="With FCO" >With FCO</option>
+                                <option {{ $complain->complaint_status == "Under FRMC deliberations for Closure/Investigation" ? 'selected' : '' }} value="Under FRMC deliberations for Closure/Investigation" >Under FRMC deliberations for Closure/Investigation</option>
+                                <option {{ $complain->complaint_status == "Under Investigation" ? 'selected' : '' }} value="Under Investigation" >Under Investigation</option>
+                                <option {{ $complain->complaint_status == "Fraud Not Established after FRMC Deliberation" ? 'selected' : '' }} value="Fraud Not Established after FRMC Deliberation">Fraud Not Established after FRMC Deliberation</option>
+                                <option {{ $complain->complaint_status == "Fraud Established after FRMC Deliberation" ? 'selected' : '' }} value="Fraud Established after FRMC Deliberation">Fraud Established after FRMC Deliberation</option>
+                                <option {{ $complain->complaint_status == "Fraud Established after FRMC Deliberationas" ? 'selected' : '' }} value="Fraud Established after FRMC Deliberationas">Fraud Established after FRMC Deliberationas</option>
+                                <option {{ $complain->complaint_status == "Withdrawn – to be ignored" ? 'selected' : '' }} value="Withdrawn – to be ignored">Withdrawn – to be ignored</option>
+                              </select>
+                          </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Withdrawn – to be ignored</label>
@@ -69,7 +96,7 @@
                               </select>
                           </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     
                     <br> <br>
@@ -119,8 +146,7 @@
 
 
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
-
+                    <a href="{{ route('fco.complaints') }}" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
               </div>

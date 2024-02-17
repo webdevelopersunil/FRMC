@@ -12,13 +12,16 @@
                   <h4 class="card-title">Updation by Nodal Officer</h4>
                   <p class="card-description" > Detail Page </p>
 
-                  <form class="forms-sample" action="" >
+                  <form class="forms-sample" action="{{ route('nodal.complaint.update') }}" method="post" enctype="multipart/form-data">
 
+                        @csrf
+                        
+                        <input type="hidden" value="{{$list_id}}" name="id">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Uploading Preliminary Report</label>
-                                <input type="file" class="form-control" id="exampleInputUsername1" placeholder="file">
+                                <input type="file" required class="form-control" name="preliminary_report" id="exampleInputUsername1" placeholder="file">
                             </div>
                         </div>
                     </div>
@@ -32,13 +35,13 @@
                           <div class="col-md-5">
                               <div class="form-group">
                                   <label for="exampleInputUsername1">Document</label>
-                                  <input type="file" class="form-control" id="exampleInputUsername1" placeholder="file">
+                                  <input type="file" class="form-control"  name="files[]" id="exampleInputUsername1" placeholder="file">
                               </div>
                           </div>
                           <div class="col-md-5">
                               <div class="form-group">
                                   <label for="exampleInputUsername1">Additional Detail</label>
-                                  <textarea name="" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="details[]" cols="30" rows="2"></textarea>
                               </div>
                           </div>
                           <div class="col-md-2">
@@ -51,7 +54,7 @@
                     </div>                  
 
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
+                    <a href="{{ route('nodal.complaints') }}" class="btn btn-light">Cancel</a>
 
                   </form>
                 </div>

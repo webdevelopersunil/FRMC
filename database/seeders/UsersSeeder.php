@@ -24,8 +24,8 @@ class UsersSeeder extends Seeder
                 'password'  =>  Hash::make('password'),
                 'username'  => 'user',
                 // 'cpfNo'     => 'A004629',
-                'address'   => 'Address of the nodel officer',
-                'phone'     => '1212121214',
+                'address'   => 'Address of the user',
+                'phone'     => '8259950403',
             ]
         )->assignRole('user');
         
@@ -35,9 +35,9 @@ class UsersSeeder extends Seeder
                 'email'     => 'nodal@gmail.com',
                 'password'  =>  Hash::make('password'),
                 'username'  => 'nodal_officer',
-                'cpfNo'     => 'A004628',
+                'cpfNo'     => 'nodal_officer',
                 'address'   => 'Address of the nodel officer',
-                'phone'     => '1212121212',
+                'phone'     => '9400888999',
             ]
         )->assignRole('nodal');
 
@@ -47,9 +47,9 @@ class UsersSeeder extends Seeder
                 'email'     => 'fco@gmail.com',
                 'password'  =>  Hash::make('password'),
                 'username'  => 'fco_officer',
-                'cpfNo'     => 'A004629',
+                'cpfNo'     => 'fco_officer',
                 'address'   => 'Address of the nodel officer',
-                'phone'     => '1212121213',
+                'phone'     => '9400777888',
             ]
         )->assignRole('fco');
         

@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_additional_details', function (Blueprint $table) {
-
+        Schema::create('preliminary_reports', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('complain_id')->unsigned();
-            $table->bigInteger('complainant_id')->unsigned();
-            $table->text('description')->required();
-            $table->text('document_name')->required();
-            $table->text('directory')->required();
-            $table->text('mime_type')->required();
-            $table->rememberToken();
+            $table->string('file')->required();
+            $table->string('mime')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_additional_details');
+        Schema::dropIfExists('preliminary_reports');
     }
 };

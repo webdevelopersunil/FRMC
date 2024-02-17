@@ -23,7 +23,7 @@ class ComplaintController extends Controller{
     public function create(Request $request){
 
         // $complainNo = Complain::generateUniqueComplainNo();
-
+        
         $complainNo     =   'CMPL000'.rand(10,1000000);
         
         return view('user.create', compact('complainNo'));

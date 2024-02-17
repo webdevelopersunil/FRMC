@@ -12,6 +12,10 @@
                   <h4 class="card-title">Updation by Nodal Officer</h4>
                   <p class="card-description" > Detail Page </p>
 
+                  <!-- Error Section Start Here 'message-block' -->
+                    @include('includes/message-block')
+                  <!-- Error Section Ends Here -->
+
                   <form class="forms-sample" action="{{ route('nodal.complaint.update') }}" method="post" enctype="multipart/form-data">
 
                         @csrf

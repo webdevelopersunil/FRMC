@@ -21,33 +21,9 @@
 
                         <div class="table-responsive">
 
-                        @if($errors->any())
-                        <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
-                            <span class="alert-text text-black">
-                            {{$errors->first()}}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
-                    @if(session('success'))
-                        <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
-                            <span class="alert-text text-black">
-                            {{ session('success') }}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
-                    @if(session('error'))
-                        <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
-                            <span class="alert-text text-black">
-                            {{ session('error') }}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
+                        <!-- Error Section Start Here 'message-block' -->
+                            @include('includes/message-block')
+                        <!-- Error Section Ends Here -->
                     
                             <table class="table table-striped">
                             <thead>

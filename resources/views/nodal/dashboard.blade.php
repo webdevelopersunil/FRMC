@@ -2,11 +2,11 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     
-    <div class="content-wrapper">
+      <div class="content-wrapper">
           
-          <!-- Blocks section start here -->
-            @include('includes/block')
-          <!-- Blocks section ends here -->
+        <!-- Blocks section start here -->
+          @include('includes/block')
+        <!-- Blocks section ends here -->
           
 
           <div class="row">
@@ -17,6 +17,11 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="table-responsive">
+
+                        <!-- <div class="d-flex justify-content-end mb-3">
+                            <a class="btn btn-primary" href="{{ route('') }}"> + New Complaint</a>
+                        </div> -->
+
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
                             <tr>
@@ -47,8 +52,10 @@
                                 </tr>
                               @endforeach
                           </tbody>
-                      </table>
-                      {{ $lists->links() }}
+                        </table>
+
+                        {{ $lists->links() }}
+
                       </div>
                     </div>
                   </div>
@@ -58,5 +65,4 @@
             </div>
         </div>
 
-    
 </x-app-layout>

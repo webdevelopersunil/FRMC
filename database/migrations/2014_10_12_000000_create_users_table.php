@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('username')->unique()->nullable();
-            $table->string('cpfNo')->unique()->nullable();
+            $table->string('username')->unique()->required();
+
+            $table->string('cpfNo')->unique()->nullable();  //Removable
+
             $table->string('address')->nullable();
             $table->string('phone')->unique()->nullable();
             $table->string('password');

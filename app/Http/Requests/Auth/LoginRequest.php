@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Route;
 use LdapRecord\Container;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -32,15 +33,8 @@ class LoginRequest extends FormRequest
     {
         $rules = [
             'password' => 'required|string',
+            'username' => 'required|string',
         ];
-
-        if ($this->has('cpfNo')) {
-            // If 'cpfNo' is present, validate 'cpfNo' and 'password'
-            $rules['cpfNo'] = 'required|string';
-        } elseif ($this->has('phone')) {
-            // If 'phone' is present, validate 'phone' and 'password'
-            $rules['phone'] = 'required|string';
-        }
 
         return $rules;
     }
@@ -50,58 +44,35 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
-    {
+    public function authenticate(): void{
+
         $this->ensureIsNotRateLimited();
 
-        $cpfNo      =   $this->input('cpfNo');
-        $phone      =   $this->input('phone');
-        $password   =   $this->input('password');
+        if( User::where('username', $this->input('username'))->first() ){
+            
+            if (! Auth::attempt(['username' => $this->input('username'), 'password' => $this->input('password') ])) {
 
-        if( $this->input('cpfNo') && $this->input('cpfNo') != NULL ){
-
-
-                $user       =   User::where('cpfNo', $cpfNo)->first();
-                if($user == null){
-                    $connection = Container::getConnection('default');
-                    $record = $connection->query()->findBy('samaccountname', $cpfNo );
-                    if(!$record) {
-                        // User not found, throw validation exception
-                        throw ValidationException::withMessages([
-                            'cpfno' => trans('auth.user_not_found'),
-                        ]);
-                    }else{
-                        $user = User::create([
-                            'name' => $record['name'][0],
-                            'email' => $record['mail'][0],
-                            'cpfNo' => $cpfNo,
-                            // 'username' => $request->username,
-                            'password' => Hash::make($password),
-                        ]);
-                    }
-                }
-
-                // Attempt LDAP authentication
-                if (! Auth::attempt(['cpfno' => $cpfNo, 'password' => $password])) {
-                    RateLimiter::hit($this->throttleKey());
-
-                    throw ValidationException::withMessages([
-                        'cpfNo' => trans('auth.failed'),
-                    ]);
-                }
-
-
-        }else if( $this->input('phone') != NULL ){
-
-            // User authentication with phone
-            if (! Auth::attempt(['phone' => $phone, 'password' => $password])) {
                 RateLimiter::hit($this->throttleKey());
 
                 throw ValidationException::withMessages([
-                    'phone' => trans('auth.failed'),
+                    'username' => trans('auth.failed'),
                 ]);
             }
 
+        }else{
+            
+            try {
+
+                $this->validateLdapRegisterUser($this->input('username'), $this->input('password'));
+                Auth::attempt(['username' => $this->input('username'), 'password' => $this->input('password')]);
+
+            } catch (\Exception $e) {
+
+                // In case user not registered
+                throw ValidationException::withMessages([
+                    'username' => trans('auth.failed') . '-' . $e->getMessage(),
+                ]);
+            }
         }
         
         RateLimiter::clear($this->throttleKey());
@@ -136,5 +107,27 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+    }
+
+    public function validateLdapRegisterUser( String $username, String $password ){
+
+        // $connection = Container::getConnection('default');
+        
+        if((Container::getConnection('default'))->query()->findBy('samaccountname', $username)){
+
+            // User not found, throw validation exception
+            throw ValidationException::withMessages([
+                'username' => trans('auth.user_not_found'),
+            ]);
+
+        }else{
+
+            $user = User::create([
+                'name' => $record['name'][0],
+                'email' => $record['mail'][0],
+                'username' => $username,
+                'password' => Hash::make($password),
+            ]);
+        }
     }
 }

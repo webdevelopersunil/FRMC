@@ -6,15 +6,14 @@
         @csrf
         <!-- Email Address -->
         <div>
-            <x-input-label for="phone" :value="__('Mobile Number')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone') ? old('phone') : '8259950403'" required autofocus autocomplete="phone" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            <x-input-label for="username" :value="__('Mobile Number')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username') ? old('username') : '8259950403'" required autofocus />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"

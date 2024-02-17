@@ -7,9 +7,9 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="cpfNo" :value="__('CPF No')" />
-            <x-text-input id="cpfNo" class="block mt-1 w-full" type="text" name="cpfNo" :value="old('cpfNo') ? old('cpfNo') : 'nodal_officer'" required autofocus autocomplete="cpfNo" />
-            <x-input-error :messages="$errors->get('cpfNo')" class="mt-2" />
+            <x-input-label for="username" :value="__('CPF No')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username') ? old('username') : 'nodal_officer'" required autofocus />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
         <!-- Password -->

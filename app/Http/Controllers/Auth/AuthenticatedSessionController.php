@@ -23,8 +23,8 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
+    public function store(LoginRequest $request): RedirectResponse{
+
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -33,14 +33,17 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         if ($user->hasRole('user')) {
-
+            
             return redirect(RouteServiceProvider::USER);
-        } elseif ($user->hasRole('nodal')) {
 
+        } elseif ($user->hasRole('nodal')) {
+            
             return redirect(RouteServiceProvider::NODAL);
+
         }elseif ($user->hasRole('fco')) {
 
             return redirect(RouteServiceProvider::FCO);
+
         }
         
     }

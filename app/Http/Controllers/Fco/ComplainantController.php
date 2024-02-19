@@ -6,8 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Complain;
+use App\Models\DetailedStatus;
+use Auth;
 
 class ComplainantController extends Controller{
+
+    protected $user;
+
+    public function __construct(){
+        
+        $this->user = Auth::user();
+    }
 
 
     public function index(Request $request){
@@ -19,21 +28,35 @@ class ComplainantController extends Controller{
 
     public function edit($list_id){
 
-        $complain    =   Complain::find($list_id);
+        $complain           =   Complain::find($list_id);
+
+        $detailedStatus     =   DetailedStatus::where(['complain_id'=>$list_id])->first();
         
-        return view('fco.edit', compact('list_id','complain'));
+        return view('fco.edit', compact('list_id','complain','detailedStatus'));
     }
 
     public function update(Request $request){
+        // dd($request->all());
 
         try {
+            
             // Update the Complain record
             DB::beginTransaction();
 
-            Complain::where('id', $request->id)->update([
-                'work_centre' => trim($request->work_centre),
-                'complaint_status' => trim($request->complaint_status),
-            ]);
+            // Update complain with public status
+            $complain = Complain::find($request->id);
+            if ($complain) {
+                $complain->public_status    = $request->public;
+                $complain->work_centre      = trim($request->work_centre);
+                $complain->complaint_status = trim($request->complaint_status);
+                $complain->save();
+            }
+
+
+            $detailedStatus = DetailedStatus::updateOrCreate(
+                ['complain_id' => $request->id, 'fco_id' => \Auth::user()->id],
+                ['public' => $request->public, 'private' => $request->private]
+            );
 
             DB::commit();
 
@@ -48,7 +71,7 @@ class ComplainantController extends Controller{
             \Log::error('Error updating complaint: ' . $e->getMessage());
 
             // Redirect with error message
-            return redirect()->back()->with('error', 'Failed to update complaint. Please try again.');
+            return redirect()->back()->with('error', 'Failed to update complaint. Please try again.'. $e->getMessage());
         }
     }
 

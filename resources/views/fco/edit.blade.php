@@ -62,64 +62,29 @@
                         </div>
                     </div>
 
-                    <!-- <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Withdrawn – to be ignored</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>YES</option>
-                                <option>NO</option>
-                              </select>
-                          </div>
-                        </div>
-                    </div> -->
-
-                    
                     <br> <br>
+
                     <h5 class="card-title">Updation by the office of FCO</h5>
+                    <br><br>
+                    <div id="rowContainer">
+                      <div class="row dub-row">
 
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Public</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="publicInput">
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary" id="addPublic">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title">Public – Visible to all users</h4>
-                              <ul id="public_visible">
-                                  <li>Lorem ipsum dolor sit amet <a href="#" style="color:red; text-align:right;" class="removeItem">X</a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Private</label>
-                              <div class="input-group">
-                                  <input type="text" class="form-control" id="privateInput" >
-                                  <div class="input-group-append">
-                                      <button type="button" onclick class="btn btn-primary" id="addPrivate" >Add</button>
-                                  </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputUsername1">Public – Visible to all users</label>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="public" cols="30" rows="4">{{ $detailedStatus->public ? $detailedStatus->public : null }}</textarea>
                               </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h4 class="card-title">Private – Visible to only the users associated with the office of FCO</h4>
-                              <ul id="private_visible" >
-                                <li>Lorem ipsum dolor sit amet</li>
-                              </ul>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
 
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputUsername1">Private – Visible to only the users associated with the office of FCO</label>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="private" cols="30" rows="4">{{ $detailedStatus->private ? $detailedStatus->private : null }}</textarea>
+                              </div>
+                          </div>
+                          
+                      </div>
+                    </div>  
 
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <a href="{{ route('fco.complaints') }}" class="btn btn-light">Cancel</a>
@@ -132,48 +97,4 @@
             
           </div>
         </div>
-
-
-
-<script>
-    document.getElementById("addPublic").addEventListener("click", function() {
-
-        var publicInputValue = document.getElementById("publicInput").value;
-        if(publicInputValue!=''){
-          var privateVisibleList = document.getElementById("public_visible");
-          var newListItem = document.createElement("li");
-          
-          newListItem.innerHTML = publicInputValue + ' <a href="#" style="color:red; text-align:right;" class="removeItem">X</a>';
-          privateVisibleList.appendChild(newListItem);
-        }
-    });
-    // Add event listener to dynamically created "X" links
-    document.getElementById("public_visible").addEventListener("click", function(event) {
-        if (event.target.classList.contains("removeItem")) {
-            event.preventDefault(); // Prevent the default behavior of the link
-            event.target.parentElement.remove(); // Remove the list item containing the "X" link
-        }
-    });
-
-
-    document.getElementById("addPrivate").addEventListener("click", function() {
-
-    var publicInputValue = document.getElementById("privateInput").value;
-    if(publicInputValue!=''){
-      var privateVisibleList = document.getElementById("private_visible");
-      var newListItem = document.createElement("li");
-      
-      newListItem.innerHTML = publicInputValue + ' <a href="#" style="color:red; text-align:right;" class="removeItem">X</a>';
-      privateVisibleList.appendChild(newListItem);
-    }
-    });
-    // Add event listener to dynamically created "X" links
-    document.getElementById("private_visible").addEventListener("click", function(event) {
-    if (event.target.classList.contains("removeItem")) {
-        event.preventDefault(); // Prevent the default behavior of the link
-        event.target.parentElement.remove(); // Remove the list item containing the "X" link
-    }
-    });
-
-</script>
 </x-app-layout>

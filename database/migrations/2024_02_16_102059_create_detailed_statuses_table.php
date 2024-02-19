@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('detailed_statuses', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('fco_id')->unsigned();
+            $table->bigInteger('complain_id')->unsigned();
             $table->string('public')->nullable();
             $table->string('private')->nullable();
             $table->softDeletes();

@@ -16,7 +16,7 @@ class ComplaintController extends Controller{
     
     public function index(Request $request){
 
-        $lists  =   Complain::paginate(10);
+        $lists  =   Complain::where('complainant_id',Auth::user()->id)->paginate(10);
         return view('user.list', compact('lists'));
     }
 

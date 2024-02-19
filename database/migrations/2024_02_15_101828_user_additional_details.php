@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('document_name')->required();
             $table->text('directory')->required();
             $table->text('mime_type')->required();
-            $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

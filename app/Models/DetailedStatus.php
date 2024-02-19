@@ -15,6 +15,7 @@ class DetailedStatus extends Model{
         'fco_id',
         'public',
         'private',
+        'complain_id',
     ];
 
     /**
@@ -25,6 +26,7 @@ class DetailedStatus extends Model{
     protected $hidden = [
         
     ];
+    
 
 
 

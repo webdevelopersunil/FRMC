@@ -12,10 +12,8 @@ class NodalAdditionalDetail extends Model
 
     protected $fillable = [
         'complain_id',
-        'complainant_id',
+        'nodal_id',
         'description',
         'file',
-        'path',
-        'mime',
     ];
 }

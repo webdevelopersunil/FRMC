@@ -12,6 +12,8 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Route;
 use LdapRecord\Container;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 
 class LoginRequest extends FormRequest
@@ -63,11 +65,32 @@ class LoginRequest extends FormRequest
             
             try {
 
-                $this->validateLdapRegisterUser($this->input('username'), $this->input('password'));
-                Auth::attempt(['username' => $this->input('username'), 'password' => $this->input('password')]);
+                // $status =   $this->validateLdapRegisterUser($this->input('username'), $this->input('password'));
+
+                $connection = Container::getConnection('default');
+                $record = $connection->query()->findBy('samaccountname', $this->input('username') );
+
+                if(!$record) {
+
+                    // User not found, throw validation exception
+                    throw ValidationException::withMessages([
+                        'username' => trans('auth.user_not_found'),
+                    ]);
+        
+                }else{
+                    
+                    $user = User::create([
+                        'name' => $record['name'][0],
+                        'email' => $record['mail'][0],
+                        'username' => $this->input('username'),
+                        'password' => Hash::make($this->input('password')),
+                    ])->assignRole('user');
+                }
+
+                \Auth::attempt(['username' => $this->input('username'), 'password' => $this->input('password')]);
 
             } catch (\Exception $e) {
-
+                
                 // In case user not registered
                 throw ValidationException::withMessages([
                     'username' => trans('auth.failed') . '-' . $e->getMessage(),

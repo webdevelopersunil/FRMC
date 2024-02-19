@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('nodal_additional_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('complain_id')->unsigned();
-            $table->bigInteger('complainant_id')->unsigned();
+            $table->bigInteger('nodal_id')->unsigned();
             $table->text('description')->required();
             $table->text('file')->required();
-            $table->text('path')->required();
-            $table->text('mime')->required();
+            // $table->text('path')->required();
+            // $table->text('mime')->required();
             $table->softDeletes();
             $table->timestamps();
         });

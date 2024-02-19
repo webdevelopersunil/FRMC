@@ -19,7 +19,7 @@
                       <div class="table-responsive">
 
                         <!-- <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href="{{ route('') }}"> + New Complaint</a>
+                            <a class="btn btn-primary" href=""> + New Complaint</a>
                         </div> -->
 
                         <table id="example" class="display expandable-table" style="width:100%">

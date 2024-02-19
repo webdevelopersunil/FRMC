@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Complain extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'complains';
 
@@ -20,6 +21,7 @@ class Complain extends Model
         'against_persons',
         'public_status',
         'complaint_status',
+        'preliminary_report',
     ];
 
     /**
@@ -39,5 +41,6 @@ class Complain extends Model
 
         return 'CMPL0000' . str_pad(rand(0, 99999), 4, '0', STR_PAD_LEFT) . ($lastInsertedId ? $lastInsertedId->id : '0');
     }
+
     
 }

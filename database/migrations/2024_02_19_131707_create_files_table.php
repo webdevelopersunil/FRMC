@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preliminary_reports', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('complain_id')->unsigned();
-            $table->string('file')->required();
-            $table->string('mime')->nullable();
+            $table->string('name')->required();
+            $table->string('directory')->required();
+            $table->string('mime')->required();
+            $table->string('size')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('preliminary_reports');
+        Schema::dropIfExists('files');
     }
 };

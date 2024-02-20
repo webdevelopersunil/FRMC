@@ -78,9 +78,9 @@ class ComplainantController extends Controller{
     public function view($complain_id){
 
         $complain    =   Complain::find($complain_id);
-        // $nodalAdditionalDetails  =   NodalAdditionalDetail::where('complain_id',$complain_id)->get();
+        $detailedStatus     =   DetailedStatus::where(['complain_id'=>$complain->id])->first();
         
-        return view('fco.view', compact('complain'));
+        return view('fco.view', compact('complain','detailedStatus'));
     }
 
 }

@@ -16,11 +16,13 @@ return new class extends Migration
             $table->bigInteger('complain_id')->unsigned();
             $table->bigInteger('nodal_id')->unsigned();
             $table->text('description')->required();
-            $table->text('file')->required();
-            // $table->text('path')->required();
-            // $table->text('mime')->required();
+            $table->bigInteger('file_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('complain_id')->references('id')->on('complains')->onDelete('cascade');
+            $table->foreign('nodal_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
         });
     }
 

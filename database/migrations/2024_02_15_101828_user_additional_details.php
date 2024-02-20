@@ -17,11 +17,13 @@ return new class extends Migration
             $table->bigInteger('complain_id')->unsigned();
             $table->bigInteger('complainant_id')->unsigned();
             $table->text('description')->required();
-            $table->text('document_name')->required();
-            $table->text('directory')->required();
-            $table->text('mime_type')->required();
+            $table->bigInteger('file_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('complain_id')->references('id')->on('complains')->onDelete('cascade');
+            $table->foreign('complainant_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
         });
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\File;
 use App\Models\Complain;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -49,30 +50,22 @@ class ComplaintController extends Controller{
             $complain->public_status        =   $request->public_status;
             $complain->save();
 
-            // if ($request->hasFile('documents')) {
-            //     $folder = 'user-document';
-            //     foreach ($request->file('documents') as $file) {
-            //         $path = $file->store('uploads/'.$folder);
-            //         $fileNames[] = basename($path);
-            //     }
-            // }
-
             if ($request->hasFile('document')) {
-                
-                $folder = 'user-document';
-                $path = $request->file('document')->store('uploads/'.$folder);
-                $fileName = basename($path);
 
-                $userAdditionalDetail                   =   new UserAdditionalDetail();
-                $userAdditionalDetail->complain_id      =   $complain->id;
-                $userAdditionalDetail->complainant_id   =   Auth::user()->id;
-                $userAdditionalDetail->description      =   $request->additional_detail;
-                $userAdditionalDetail->document_name    =   $fileName;
-                $userAdditionalDetail->directory        =   $path;
-                $userAdditionalDetail->mime_type        =   'file';
-                $userAdditionalDetail->save();
+                foreach( $request->file('document') as $index => $file ){
+                    
+                    $file   =   File::upload($file, $complain->complain_no.'/user/additional-document/');
+                    
+                        $userAdditionalDetail                   =   new UserAdditionalDetail();
+                        $userAdditionalDetail->complain_id      =   $complain->id;
+                        $userAdditionalDetail->complainant_id   =   Auth::user()->id;
+                        $userAdditionalDetail->description      =   $request->additional_detail[$index];
+                        $userAdditionalDetail->file_id          =   $file->id;
+
+                        $userAdditionalDetail->save();
+                }
             }
-        
+
             return redirect()->route('user.complaints')->with('success', 'Complain has been created');
             
         } catch (\Exception $e) {
@@ -84,11 +77,11 @@ class ComplaintController extends Controller{
     }
 
     public function view($complain_id){
+ 
+        $complain               =   Complain::with('preliminaryReport','userAdditionalDetails')->find($complain_id);
+        $userAdditionalDetails  =   UserAdditionalDetail::where('complain_id',$complain->id)->get();
 
-        $complain    =   Complain::find($complain_id);
-        $userAdditionalDetails  =   UserAdditionalDetail::all();
-
-        return view('user.view', compact('complain','userAdditionalDetails'));
+        return view('user.view', compact('complain'));
     }
     
     public function edit(Request $request){

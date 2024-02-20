@@ -14,6 +14,11 @@ class NodalAdditionalDetail extends Model
         'complain_id',
         'nodal_id',
         'description',
-        'file',
+        'file_id',
     ];
+
+    public function file(){
+
+        return $this->hasOne(File::class, 'id', 'file_id');
+    }
 }

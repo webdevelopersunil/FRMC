@@ -27,8 +27,8 @@
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Work Centre</label>
-                              <select class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
-                                <option selected disabled >{{ $complain->work_centre }}</option>
+                              <select disabled class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
+                                <option selected  >{{ $complain->work_centre }}</option>
                               </select>
                           </div>
                         </div>
@@ -60,7 +60,7 @@
 
                     
                     <br> <br>
-                    <h5 class="card-title">Updation by the office of FCO</h5>
+                    <!-- <h5 class="card-title">Updation by the office of FCO</h5> -->
 
                     <div class="row">
                       <div class="col-md-6">
@@ -78,7 +78,8 @@
                               <h4 class="card-title">Public – Visible to all users</h4>
                               <ul id="public_visible">
 
-                                  <li> .. . </li>
+                                  <!-- <li> .. . </li> -->
+                                  <h6> <span>-</span> {{ isset($detailedStatus->public) ? $detailedStatus->public : '' }}</h6>
 
                               </ul>
                             </div>
@@ -90,7 +91,8 @@
                             <div class="card-body">
                               <h4 class="card-title">Private – Visible to only the users associated with the office of FCO</h4>
                               <ul id="private_visible" >
-                                <li> .. . </li>
+                                <!-- <li> .. . </li> -->
+                                <h6> <span>-</span> {{ isset($detailedStatus->private) ? $detailedStatus->private : ''}}</h6>
                               </ul>
                             </div>
                           </div>

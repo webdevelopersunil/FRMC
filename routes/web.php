@@ -25,6 +25,13 @@ use App\Http\Controllers\Fco\ComplainantController as FcoComplaintController;
 |
 */
 
+Route::middleware(['auth', 'verified', 'role:user,nodal,fco'])->group(function () {
+    
+    Route::get('/view-file/{file}', [CommonController::class, 'viewFile'])->name('view-file');
+
+    Route::get('/preview/file/{file_id}', [CommonController::class, 'previewFile'])->name('preview.file');
+});
+
 // User Routes
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
 

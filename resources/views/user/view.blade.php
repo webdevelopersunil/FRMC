@@ -71,19 +71,21 @@
                   <h4>Additional Details</h4>
                   <br>
                   
-                  @foreach($userAdditionalDetails as $index => $detail)
+                  @foreach($complain->userAdditionalDetails as $index => $detail)
                     <div id="rowContainer">
                       <div class="row dub-row">
-                          <div class="col-md-3">
+                          <div class="col-md-2">
                               <div class="form-group">
                                   <label for="exampleInputUsername1">Document</label>
-                                  <input type="file" class="form-control" name="" value="" id="exampleInputUsername1" placeholder="file">
+                                  <a href="{{ route('preview.file',$detail->file->id) }}" target="_blank" class="text-success d-block text-truncate"> 
+                                      View Document
+                                  </a>
                               </div>
                           </div>
-                          <div class="col-md-9">
+                          <div class="col-md-10">
                               <div class="form-group">
-                                  <label for="exampleInputUsername1">Additional Detail</label>
-                                  <textarea name="additional_detail[]" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
+                                  <label for="exampleInputUsername1">Document Description</label>
+                                  <textarea disabled name="" class="form-control" id="exampleInputUsername1" cols="30" rows="2">{{$detail->description}}</textarea>
                               </div>
                           </div>
                       </div>

@@ -14,9 +14,12 @@ class UserAdditionalDetail extends Model
         'complain_id',
         'complainant_id',
         'description',
-        'document_name',
-        'directory',
-        'mime_type',
+        'file_id',
     ];
+
+    public function file(){
+
+        return $this->hasOne(File::class, 'id', 'file_id');
+    }
 
 }

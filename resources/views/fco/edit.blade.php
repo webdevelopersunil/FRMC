@@ -72,14 +72,14 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label for="exampleInputUsername1">Public – Visible to all users</label>
-                                  <textarea class="form-control" id="exampleInputUsername1" name="public" cols="30" rows="4">{{ $detailedStatus->public ? $detailedStatus->public : null }}</textarea>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="public" cols="30" rows="4">{{ isset($detailedStatus->public) ? $detailedStatus->public : null }}</textarea>
                               </div>
                           </div>
 
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label for="exampleInputUsername1">Private – Visible to only the users associated with the office of FCO</label>
-                                  <textarea class="form-control" id="exampleInputUsername1" name="private" cols="30" rows="4">{{ $detailedStatus->private ? $detailedStatus->private : null }}</textarea>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="private" cols="30" rows="4">{{ isset($detailedStatus->private) ? $detailedStatus->private : null }}</textarea>
                               </div>
                           </div>
                           

@@ -88,13 +88,13 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Document</label>
-                                <input type="file" class="form-control" name="document" id="exampleInputUsername1" placeholder="file">
+                                <input type="file" class="form-control" name="document[]" id="exampleInputUsername1" placeholder="file">
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Additional Detail</label>
-                                <textarea name="additional_detail" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
+                                <textarea name="additional_detail[]" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
                             </div>
                         </div>
                         <div class="col-md-2">

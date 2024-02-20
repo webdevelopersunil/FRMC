@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('private')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('complain_id')->references('id')->on('complains')->onDelete('cascade');
         });
     }
 

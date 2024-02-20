@@ -43,14 +43,6 @@
                   </div>
 
                   <div class="row">
-                      <!-- <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Department/Section</label>
-                            <select disabled onchange="toggleOtherInput()" name="department_section" class="form-control form-control-lg" id="departmentSelect" required>
-                              <option selected >{{ $complain->department_section }}</option>
-                            </select>
-                        </div>
-                      </div> -->
                       <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputUsername1"> Department/Section </label>
@@ -78,10 +70,10 @@
                     <h4>Preliminary Report</h4>
                   <br>
 
-                  @if( $nodalAdditionalDetails != null )
+                  @if( $complain->preliminaryReport != null )
 
-                    <a href="#" target="_blank" class="text-success d-block text-truncate"> 
-                      View Preliminary Report 
+                    <a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-success d-block text-truncate"> 
+                      View Preliminary Report
                     </a>
 
                   @else
@@ -97,22 +89,22 @@
                     <h4>Other Related Documents</h4>
                   <br>
 
-                  @if( count($nodalAdditionalDetails) >= 1 )
+                  @if( count($complain->nodalAdditionalDetails) >= 1 )
 
-                  @foreach($nodalAdditionalDetails as $index => $detail)
+                  @foreach($complain->nodalAdditionalDetails as $index => $detail)
                     <div id="rowContainer">
                       <div class="row dub-row">
                           <div class="col-md-2">
                               <div class="form-group">
                                   <label for="exampleInputUsername1">Document</label>
-                                  <a href="{{ route('storage.preview', ['path' => $detail->path, 'file' => $detail->file]) }}" target="_blank" class="text-success d-block text-truncate"> 
+                                  <a href="{{ route('preview.file',$detail->file) }}" target="_blank" class="text-success d-block text-truncate"> 
                                       View Document 
                                   </a>
                               </div>
                           </div>
                           <div class="col-md-10">
                               <div class="form-group">
-                                  <label for="exampleInputUsername1">Additional Detail</label>
+                                  <label for="exampleInputUsername1"> Additional Detail</label>
                                   <textarea class="form-control" disabled id="exampleInputUsername1" cols="30" rows="4">{{ $detail->description }}</textarea>
                               </div>
                           </div>

@@ -19,12 +19,9 @@ class File extends Model{
 
 
     public static function upload($file,$path){
-        // dd($file->size());
-        // $fileName   =   time(). '.'. $request->image->extension();
-        // $request->image->storeAs('images',$fileName);
-        // $size   =   $file->size;
         
         $fileName   =   time(). '.'. $file->extension();
+        
         $file->storeAs($path,$fileName);
 
         $savedFile   =   self::create([
@@ -34,6 +31,11 @@ class File extends Model{
         ]);
 
         return $savedFile;
+    }
+
+    public function preliminary_report()
+    {
+        return $this->belongsTo(Complain::class, 'preliminary_report', 'id');
     }
 
 }

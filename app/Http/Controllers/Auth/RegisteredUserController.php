@@ -9,9 +9,11 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Ichtrojan\Otp\Otp;
 
 class RegisteredUserController extends Controller
 {
@@ -46,10 +48,36 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ])->assignRole('user');
 
+        $otp    =   (new Otp)->generate($request->username, 'numeric', 6, 15);
+        
         event(new Registered($user));
+        
+        return redirect(RouteServiceProvider::OTP.'/'.Crypt::encryptString($request->username));
+        
+        // Auth::login($user);
 
-        Auth::login($user);
+        // return redirect(RouteServiceProvider::USER);
+    }
 
-        return redirect(RouteServiceProvider::USER);
+    public function confirmOtpVerification(Request $request){
+
+        $user   =   User::where('username',$request->username)->first();
+
+        if($user->is_phone_verified == '0'){
+            
+            $status =   (new Otp)->validate($request->username, $request->otp);
+            
+            if ($status->status == false) {
+                
+                return redirect()->back()->withErrors(['otp' => 'Please enter valid OTP.']);   
+            }
+
+            $user->is_phone_verified = '1'; // Assuming is_phone_verified is a boolean field
+            $user->save();
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::USER);
+        }
     }
 }

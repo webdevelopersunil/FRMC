@@ -6,10 +6,19 @@
     <div class="content-wrapper">
           <div class="row">
 
+            @include('includes/complain_detail')
+            @include('includes/nodal_complain_detail')
+
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Updation by the office of FCO</h4>
+
+                  <div class="d-flex justify-content-end mb-3">
+                      <a class="btn btn-primary" href="{{ route('fco.change.work.centre',$list_id) }}">Change Work Centre</a>
+                  </div>
+                  
+                  <br>
 
                   <!-- Error Section Start Here 'message-block' -->
                     @include('includes/message-block')
@@ -20,7 +29,7 @@
                       @csrf
                     <input type="hidden" value="{{$list_id}}" name="id">
                   
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Nodel Officer</label>
@@ -41,7 +50,7 @@
                               </select>
                           </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">

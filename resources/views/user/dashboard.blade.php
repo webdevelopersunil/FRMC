@@ -21,7 +21,7 @@
                             <a class="btn btn-primary" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
                         </div>
 
-                        <table class="table table-striped">
+                        <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
                             <tr>
                               <th> #Index </th>
@@ -30,12 +30,22 @@
                               <th> Complaint Against </th>
                               <th> Department/Section </th>
                               <th> ONGC Work Centre </th>
+                              <th> complaint Status </th>
                               <th> Public Detailed Status </th>
                               <th> Action </th>
                             </tr>
                           </thead>
 
                           <tbody>
+                              @if( count($lists) == 0 )
+                                  <tr>
+                                      <td colspan="9" >
+                                          <div class="alert alert-primary text-center" role="alert">
+                                              No data found
+                                          </div>
+                                      </td>
+                                  </tr>
+                              @endif
                               @foreach($lists as $index => $list)
                                 <tr>
                                   <td> {{ $index + 1 }} </td>
@@ -44,9 +54,10 @@
                                   <td> {{ $list->against_persons }} </td>
                                   <td> {{ $list->department_section }}</td>
                                   <td> {{ $list->work_centre }} </td>
+                                  <td> {{ $list->complaint_status }} </td>
                                   <td>{{ $list->public_status ? $list->public_status : '---' }}</td>
                                   <td>
-                                    <a href="{{ route('user.complaint.view', $list->id) }}">View</a>
+                                    <a href="{{ route('user.complaint.view', $list->id) }}" class="btn btn-sm link-with-icon"> <i class="ti-eye "></i> </a>
                                   </td>
                                 </tr>
                               @endforeach

@@ -8,6 +8,7 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">New Complaint</h4>
+                <br>
                 
                 <!-- Error Section Start Here 'message-block' -->
                     @include('includes/message-block')
@@ -35,33 +36,30 @@
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">ONGC Work Centre</label>
-                            <select class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
-                                <option selected disabled >Please Select</option>
-                                <option value="Delhi" >Delhi</option>
-                                <option value="Dehradun" >Dehradun</option>
-                                <option value="Mumbai" >Mumbai</option>
-                                <option value="Ahmedabad" >Ahmedabad</option>
-                            </select>
-                        </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">ONGC Work Centre</label>
+                              <select class="form-control form-control-lg" name="work_centre" id="workCentreSelect" required>
+                                  <option selected disabled>Please Select</option>
+                                  <option value="Delhi">Delhi</option>
+                                  <option value="Dehradun">Dehradun</option>
+                                  <option value="Mumbai">Mumbai</option>
+                                  <option value="Ahmedabad">Ahmedabad</option>
+                              </select>
+                          </div>
                       </div>
 
                       <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Department/Section</label>
-                            <select onchange="toggleOtherInput()" name="department_section" class="form-control form-control-lg" id="departmentSelect" required>
-                              <option selected disabled >Please Select</option>
-                              <option value="Department 1" >Department 1</option>
-                              <option value="Department 2" >Department 2</option>
-                              <option value="Department 3" >Department 3</option>
-                              <option value="Department 4" >Department 4</option>
-                              <option value="Others" >Others</option>
-                            </select>
-                        </div>
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Department/Section</label>
+                              <select name="department_section" class="form-control form-control-lg" id="departmentSelect" onchange="handleSelectChange()" required>
+                                  <option selected disabled>Please Select</option>
+                                  <option value="Others" >Others</option>
+                              </select>
+                          </div>
                       </div>
+                      
                       <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputUsername1"> Department (If clicked Others) </label>
@@ -93,7 +91,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label for="exampleInputUsername1">Additional Detail</label>
+                                <label for="exampleInputUsername1">Document Description</label>
                                 <textarea name="additional_detail[]" class="form-control" id="exampleInputUsername1" cols="30" rows="2"></textarea>
                             </div>
                         </div>
@@ -152,7 +150,66 @@
           });
         });
 
+        function handleSelectChange() {
+
+          var selectedValue = document.getElementById('departmentSelect').value;
+          var othersInput = document.getElementById('others-show');
+
+          if (selectedValue === 'Others') {
+              othersInput.disabled = false;
+              
+          } else {
+              othersInput.disabled = true;
+          }
+        }
     </script>
+
+
+<script>
+    
+    const workCentreOptions = {
+
+        'Delhi': ['Delhi Department 1', 'Delhi Department 2'],
+        'Dehradun': ['Dehradun Department 1', 'Dehradun Department 2'],
+        'Mumbai': ['Mumbai Department 1', 'Mumbai Department 2'],
+        'Ahmedabad': ['Ahmedabad Department 1', 'Ahmedabad Department 2']
+    };
+
+    // Function to update department options based on selected work centre
+    function updateDepartmentOptions() {
+
+        const workCentreSelect = document.getElementById('workCentreSelect');
+        const departmentSelect = document.getElementById('departmentSelect');
+        const selectedWorkCentre = workCentreSelect.value;
+
+        var othersInput = document.getElementById('others-show');
+        othersInput.disabled = true;
+
+        // Clear existing options
+        departmentSelect.innerHTML = '<option selected disabled>Please Select</option>';
+
+        // Add options based on selected work centre
+        workCentreOptions[selectedWorkCentre].forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            departmentSelect.appendChild(optionElement);
+            // departmentSelect.appendChild('<option value="Others" >Others</option>');
+        });
+
+        var othersOption = document.createElement('option');
+        othersOption.value = 'Others';
+        othersOption.textContent = 'Others';
+        departmentSelect.appendChild(othersOption);
+        
+    }
+
+    // Event listener to update department options when work centre is changed
+    document.getElementById('workCentreSelect').addEventListener('change', updateDepartmentOptions);
+
+    // Initial call to update department options based on default selected work centre
+    updateDepartmentOptions();
+</script>
 
 
 </x-app-layout>

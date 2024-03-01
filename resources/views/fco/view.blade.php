@@ -2,112 +2,144 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+      
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Complaint Detail</h4>
+                <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
 
-    <div class="content-wrapper">
-          <div class="row">
-
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Updation by the office of FCO</h4>
-                  
-                  <!-- <form class="forms-sample" action="{{ route('fco.complaint.update') }}" method="post"> -->
-
-                    <input type="hidden" value="" name="id">
-                  
-                    <div class="row">
-                        <div class="col-md-6">
+                <div class="d-flex justify-content-end mb-3">
+                    <a class="btn btn-primary" href="{{ route('fco.complaints') }}"> Go Back</a>
+                </div>
+                
+                <br>
+                
+                <form class="forms-sample" action="" method="" >
+                  <div class="row">
+                      <div class="col-md-12">
                           <div class="form-group">
-                              <label for="exampleInputUsername1">Nodel Officer</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1" disabled name="nodal_officer">
-                                <option value="Nodal Officer" selected >Nodal Officer</option>
-                              </select>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Work Centre</label>
-                              <select disabled class="form-control form-control-lg" name="work_centre" id="exampleFormControlSelect1" required>
-                                <option selected  >{{ $complain->work_centre }}</option>
-                              </select>
-                          </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Complaint Status</label>
-                              <select disabled name="complaint_status" class="form-control form-control-lg" id="exampleFormControlSelect1" >
-                                <option value="With Nodal Officer" selected disabled >{{$complain->complaint_status}}</option>
-                              </select>
-                          </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Withdrawn – to be ignored</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>YES</option>
-                                <option>NO</option>
-                              </select>
-                          </div>
-                        </div>
-                    </div> -->
-
-                    
-                    <br> <br>
-                    <!-- <h5 class="card-title">Updation by the office of FCO</h5> -->
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <!-- <div class="form-group">
-                            <label for="exampleInputUsername1">Public</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="publicInput">
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary" id="addPublic">Add</button>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title">Public – Visible to all users</h4>
-                              <ul id="public_visible">
-
-                                  <!-- <li> .. . </li> -->
-                                  <h6> <span>-</span> {{ isset($detailedStatus->public) ? $detailedStatus->public : '' }}</h6>
-
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
-                      <div class="col-md-6">
-                          <div class="card">
-                            <div class="card-body">
-                              <h4 class="card-title">Private – Visible to only the users associated with the office of FCO</h4>
-                              <ul id="private_visible" >
-                                <!-- <li> .. . </li> -->
-                                <h6> <span>-</span> {{ isset($detailedStatus->private) ? $detailedStatus->private : ''}}</h6>
-                              </ul>
-                            </div>
+                              <label for="exampleInputUsername1">Complaint No.</label>
+                              <input type="text" name="complain_no" class="form-control" readonly="TRUE" value="{{ $complain->complain_no }}" disabled id="exampleInputUsername1">
                           </div>
                       </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Description of Complaint</label>
+                              <textarea disabled name="description" class="form-control" id="exampleInputUsername1" cols="30" rows="4">{{$complain->description}}</textarea>
+                          </div>
                     </div>
+                  </div>
 
-                    <a class="btn btn-primary mr-2" href="{{ route('fco.complaints') }}">Back</a>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1"> Department/Section </label>
+                            <input type="text"  name="department_section_other" value="{{ $complain->department_section }}" id="others-show" disabled class="form-control" id="exampleInputUsername1" placeholder="Department/Section" required>
+                        </div>
+                      </div>
+                  </div>
 
-                </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Against Whom</label>
+                            <input type="text" disabled name="against_persons" class="form-control" value="{{$complain->against_persons}}" id="exampleInputUsername1" placeholder="Against Users names" required>
+                        </div>
+                      </div>
+                  </div>
+
+                  <br>
+                  <h4>User Additional Details</h4>
+                  <br>
+                  @if( count($complain->userAdditionalDetails) >= 1 )
+                  
+                    @foreach($complain->userAdditionalDetails as $index => $detail)
+                      <div id="rowContainer">
+                        <div class="row dub-row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Document</label>
+                                    <a href="{{ route('preview.file',$detail->file->id) }}" target="_blank" class="text-success d-block text-truncate"> 
+                                    <span> #{{$index+1}}</span>  View Document
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Document Description</label>
+                                    <textarea disabled name="" class="form-control" id="exampleInputUsername1" cols="30" rows="2">{{$detail->description}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+
+                    @endforeach
+
+                  @else
+                    <div class=" text-center font-weight-bold" role="alert">No detail found</div>
+                  @endif
+
+
+                  <br>
+                    <h4>Preliminary Report</h4>
+                  <br>
+
+                  @if( $complain->preliminaryReport != null )
+
+                    <a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-success d-block text-truncate"> 
+                      View Preliminary Report
+                    </a>
+
+                  @else
+
+                  <div class="alert alert-warning text-center" role="alert">No preliminary report found</div>
+
+                  @endif
+
+                  <br>
+                  <br>
+                    <h4>Other Related Documents</h4>
+                  <br>
+
+                  @if( count($complain->nodalAdditionalDetails) >= 1 )
+
+                    @foreach($complain->nodalAdditionalDetails as $index => $detail)
+                      <div id="rowContainer">
+                        <div class="row dub-row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Document</label>
+                                    <a href="{{ route('preview.file',$detail->file) }}" target="_blank" class="text-success d-block text-truncate"> 
+                                      <span> #{{$index+1}}</span>  View Document
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1"> Document Detail</label>
+                                    <textarea class="form-control" disabled id="exampleInputUsername1" cols="30" rows="4">{{ $detail->description }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    @endforeach
+
+                  @else
+                    <div class="alert alert-warning text-center" role="alert">No other related documents found</div>
+                  @endif
+
+                </form>
+
               </div>
             </div>
-                    
-            
-            
           </div>
         </div>
-
+      </div>
+      <!-- content-wrapper ends -->
 </x-app-layout>

@@ -11,7 +11,7 @@ class DashboardController extends Controller{
     
     public function index(Request $request){
 
-        $lists  =   Complain::paginate(10);
+        $lists  =   Complain::with('preliminaryReport')->paginate(10);
 
         $total  =   Complain::count();
 

@@ -25,6 +25,7 @@ class UsersSeeder extends Seeder
 
                 'username'  => '8259950403',
 
+                'is_phone_verified' =>  '1',
                 'cpfNo'     => 'A004629',
                 'address'   => 'Address of the user',
                 'phone'     => '8259950403',
@@ -39,6 +40,7 @@ class UsersSeeder extends Seeder
 
                 'username'  => 'nodal_officer',
 
+                'is_phone_verified' =>  '1',
                 'cpfNo'     => 'nodal_officer',
                 'address'   => 'Address of the nodel officer',
                 'phone'     => '9400888999',
@@ -53,6 +55,7 @@ class UsersSeeder extends Seeder
 
                 'username'  => 'fco_officer',
                 
+                'is_phone_verified' =>  '1',
                 'cpfNo'     => 'fco_officer',
                 'address'   => 'Address of the nodel officer',
                 'phone'     => '9400777888',

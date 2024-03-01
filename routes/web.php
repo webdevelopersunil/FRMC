@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CommonController;
+use App\Http\Controllers\AuditController;
+
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 use App\Http\Controllers\Nodal\DashboardController as NodalDashboardController;
 use App\Http\Controllers\Nodal\ComplainantController as NodalComplaintController;
@@ -25,10 +28,12 @@ use App\Http\Controllers\Fco\ComplainantController as FcoComplaintController;
 |
 */
 
+Route::get('/audits', [AuditController::class, 'index'])->name('audit');
+Route::get('/view/audits/{id}', [AuditController::class, 'viewAudit'])->name('view.audit');
+
 Route::middleware(['auth', 'verified', 'role:user,nodal,fco'])->group(function () {
     
     Route::get('/view-file/{file}', [CommonController::class, 'viewFile'])->name('view-file');
-
     Route::get('/preview/file/{file_id}', [CommonController::class, 'previewFile'])->name('preview.file');
 });
 
@@ -67,6 +72,9 @@ Route::middleware(['auth', 'verified', 'role:fco'])->group(function () {
     Route::get('/fco-complaints/view/{complain_id}', [FcoComplaintController::class, 'view'] )->name('fco.complaint.view');
 
     Route::post('/fco-complaints/update', [FcoComplaintController::class, 'update'] )->name('fco.complaint.update');
+
+    Route::get('/fco-complaints/{id}/change-work-centre', [FcoComplaintController::class, 'workCentreEdit'] )->name('fco.change.work.centre');
+    Route::post('/fco-complaints/update-work-centre', [FcoComplaintController::class, 'workCentreUpdate'] )->name('fco.complaint.work-centre.update');
 });
 
 
@@ -74,11 +82,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.login');
 Route::get('complainant/login', [FrontendController::class, 'complainantLogin'])->name('complainant.login');
+Route::get('/otp-verification/{token}', [FrontendController::class, 'otpVerification'])->name('otp-verification');
+
+Route::post('/confirm/otp-verification', [RegisteredUserController::class, 'confirmOtpVerification'])->name('confirm.otp-verification');
 
 require __DIR__.'/auth.php';

@@ -9,9 +9,28 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{ asset('assets/vendors/feather/feather.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/vertical-layout-light/style.css') }}">
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
+        <link rel="shortcut icon" href="https://cdn.samco.in/images/nuovo//nifty-500/INE213A01029.png" />
+
+
+        <link rel="stylesheet" href="{{ asset('assets/vendors/ti-icons/css/themify-icons.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('assets/css/custom-table.css') }}">
+
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        
+
+        <style>
+          .link-with-icon {
+              position: relative;
+              display: inline-block;
+              padding: 5px 10px;
+              border: none;
+              text-decoration: none;
+              transition: background-color 0.3s ease;
+          }
+          .link-with-icon:hover {
+              background-color: #d3e0ea; /* Soft blue color */
+          }
+        </style>
     </head>
 
     <body>

@@ -25,21 +25,23 @@ class ComplainantController extends Controller{
 
     public function index(Request $request){
 
-        $lists  =   Complain::paginate(10);
+        $lists  =   Complain::with('preliminaryReport')->paginate(10);
 
         return view('nodal.list', compact('lists'));
     }
 
     public function edit($list_id){
 
-        $complain    =   Complain::find($list_id);
+        $complain       =   Complain::with('preliminaryReport','userAdditionalDetails','nodalAdditionalDetails')->find($list_id);
 
-        return view('nodal.edit', compact('complain','list_id'));
+        $nodalDocs      =   $complain->nodalAdditionalDetails;
+
+        return view('nodal.edit', compact('complain','list_id','nodalDocs'));
     }
 
     public function view($complain_id){
         
-        $complain                   =   Complain::with('preliminaryReport','nodalAdditionalDetails')->find($complain_id);
+        $complain                   =   Complain::with('preliminaryReport','nodalAdditionalDetails','userAdditionalDetails')->find($complain_id);
         
         return view('nodal.view', compact('complain'));
     }

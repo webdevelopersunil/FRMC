@@ -24,6 +24,8 @@ class RouteServiceProvider extends ServiceProvider
     public const NODAL = '/nodal-dashboard';
 
     public const FCO = '/fco-dashboard';
+    
+    public const OTP = '/otp-verification';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

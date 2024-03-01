@@ -24,18 +24,11 @@
         {{ $currentRoute == 'user.complaint.view' ? 'active' : '' }} "
         >
         <a class="nav-link" href="{{ route('user.complaints') }}">
-          <i class="icon-grid menu-icon"></i>
+          <i class="icon-grid-2 menu-icon"></i>
             <span class="menu-title">User Complaints List</span>
         </a>
       </li>
 
-      <li class="nav-item {{ $currentRoute == 'profile.edit' ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('profile.edit') }}">
-          <i class="icon-grid menu-icon"></i>
-          <span class="menu-title">User Profile</span>
-        </a>
-      </li>
-      
     @endif
 
     
@@ -52,7 +45,7 @@
 
       <li class="nav-item  {{ $currentRoute == 'nodal.complaints' ? 'active' : '' }} {{ $currentRoute == 'nodal.complaint.edit' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('nodal.complaints') }}">
-          <i class="icon-grid menu-icon"></i>
+          <i class="icon-grid-2 menu-icon"></i>
           <span class="menu-title">Nodal Complaints List</span>
         </a>
       </li>
@@ -73,12 +66,19 @@
 
       <li class="nav-item  {{ $currentRoute == 'fco.complaints' ? 'active' : '' }} {{ $currentRoute == 'fco.complaint.edit' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('fco.complaints') }}">
-          <i class="icon-grid menu-icon"></i>
+          <i class="icon-grid-2 menu-icon"></i>
           <span class="menu-title">FCO Complaints List</span>
         </a>
       </li>
 
     @endif
+
+    <li class="nav-item {{ $currentRoute == 'profile.edit' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('profile.edit') }}">
+          <i class="icon-grid menu-icon"></i>
+          <span class="menu-title">User Profile</span>
+        </a>
+      </li>
     
   </ul>
 </nav>

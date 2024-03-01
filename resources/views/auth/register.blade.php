@@ -1,59 +1,89 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-        
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
 
-        <!-- Mobile Number -->
-        <div class="mt-4">
-            <x-input-label for="username" :value="__('Mobile Number')" />
-            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required />
-            <x-input-error :messages="$errors->get('username')" class="mt-2" />
-        </div>
+  <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+    <h1>
+      <a href="" rel="dofollow">Register Portal</a>
+    </h1>
+  </div>
 
-        <!-- Address -->
-        <div class="mt-4">
-            <x-input-label for="address" :value="__('Address')" />
-            <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autocomplete="address" />
-            <x-input-error :messages="$errors->get('address')" class="mt-2" />
-        </div>
+  <div class="formbg-outer">
+    <div class="formbg">
+      <div class="formbg-inner padding-horizontal--48">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        <span class="padding-bottom--15">Sign up with your details.</span>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+        <form method="POST" action="{{ route('register') }}">
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('complainant.login') }}">
-                {{ __('Already registered?') }}
-            </a>
+          @csrf
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+          <div class="field padding-bottom--24">
+              <x-input-label for="name" :value="__('Name')" />
+              <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+              <x-input-error :messages="$errors->get('name')" class="mt-2" />
+          </div>
 
-        </div>
 
-    </form>
+          <div class="field padding-bottom--24">
+              <x-input-label for="email" :value="__('Email')" />
+              <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" />
+              <x-input-error :messages="$errors->get('email')" class="mt-2" />
+          </div>
+
+          <div class="field padding-bottom--24">
+              <x-input-label for="username" :value="__('Mobile Number')" />
+              <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required />
+              <x-input-error :messages="$errors->get('username')" class="mt-2" />
+          </div>
+
+          <div class="field padding-bottom--24">
+              <x-input-label for="address" :value="__('Address')" />
+              <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autocomplete="address" />
+              <x-input-error :messages="$errors->get('address')" class="mt-2" />
+          </div>
+
+          <div class="field padding-bottom--24">
+              <x-input-label for="password" :value="__('Password')" />
+              <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+              <x-input-error :messages="$errors->get('password')" class="mt-2" />
+          </div>
+
+          <div class="field padding-bottom--24">
+              <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+              <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+              <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+          </div>
+
+          
+          <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+              <div class="reset-pass">
+                <a href="{{ route('password.request') }}">Forgot your password?</a>
+              </div>
+          </div>
+
+          <div class="field padding-bottom--24">
+            <input type="submit" name="submit" value="{{ __('Register') }}">
+          </div>
+
+          <div class="field">
+            <a class="ssolink" href="{{ route('login') }}">← Login as Admin</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+    <div class="footer-link padding-top--24">
+      <span>Back To <a href="{{ route('complainant.login') }}">Login</a></span>
+
+      <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+        <!-- <span><a href="#">© Stackfindover</a></span> -->
+        <span><a href="#">Contact</a></span>
+        <span><a href="#">Privacy & terms</a></span>
+      </div>
+
+    </div>
+    
+  </div>
 
 </x-guest-layout>

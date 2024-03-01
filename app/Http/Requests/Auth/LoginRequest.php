@@ -50,7 +50,9 @@ class LoginRequest extends FormRequest
 
         $this->ensureIsNotRateLimited();
 
-        if( User::where('username', $this->input('username'))->first() ){
+        $isUserFound =   User::where('username', $this->input('username'))->first();
+
+        if( $isUserFound ){
             
             if (! Auth::attempt(['username' => $this->input('username'), 'password' => $this->input('password') ])) {
 
@@ -83,6 +85,7 @@ class LoginRequest extends FormRequest
                         'name' => $record['name'][0],
                         'email' => $record['mail'][0],
                         'username' => $this->input('username'),
+                        'is_phone_verified' =>  '1',
                         'password' => Hash::make($this->input('password')),
                     ])->assignRole('user');
                 }
@@ -93,7 +96,7 @@ class LoginRequest extends FormRequest
                 
                 // In case user not registered
                 throw ValidationException::withMessages([
-                    'username' => trans('auth.failed') . '-' . $e->getMessage(),
+                    'username' => trans('auth.failed'),
                 ]);
             }
         }

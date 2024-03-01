@@ -8,13 +8,42 @@
           <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Complainant Detail</h4>
+                <h4 class="card-title">Complaint Detail</h4>
                 <!-- <p class="card-description" onclick="window.location=''" > otp confirmation </p> -->
 
-                <div class="template-demo">
-                    <button onclick="window.location='{{ route('nodal.complaints') }}'"  type="button" class="btn btn-primary"> Go Back </button>
+                <div class="d-flex justify-content-end mb-3">
+                    <a class="btn btn-primary" href="{{ route('nodal.complaints') }}"> Go Back</a>
                 </div>
+                
                 <br>
+
+
+                <!-- <div class="col-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="card-body">
+                          <h4 class="card-title"> Complaint Number </h4>
+                            <p class="card-description">{{ $complain->complain_no }} <button type="button" class="btn btn-link">Copy</button> </p>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="card-body">
+                          <h4 class="card-title"> Department/Section </h4>
+                          <p class="card-description"> {{ $complain->department_section }} </p>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="card-body">
+                          <h4 class="card-title"> ONGC Work Centre </h4>
+                          <p class="card-description"> {{ $complain->work_centre }} </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
 
                 <form class="forms-sample" action="" method="" >
                     
@@ -58,13 +87,39 @@
                             <input type="text" disabled name="against_persons" class="form-control" value="{{$complain->against_persons}}" id="exampleInputUsername1" placeholder="Against Users names" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">ONGC Work Centre</label>
-                            <input type="text" disabled name="against_persons" class="form-control" value="{{ $complain->work_centre }}">
+                  </div>
+
+                  <br>
+                  <h4>User Additional Details</h4>
+                  <br>
+                  @if( count($complain->userAdditionalDetails) >= 1 )
+                  
+                    @foreach($complain->userAdditionalDetails as $index => $detail)
+                      <div id="rowContainer">
+                        <div class="row dub-row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Document</label>
+                                    <a href="{{ route('preview.file',$detail->file->id) }}" target="_blank" class="text-success d-block text-truncate"> 
+                                    <span> #{{$index+1}}</span>  View Document
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Document Description</label>
+                                    <textarea disabled name="" class="form-control" id="exampleInputUsername1" cols="30" rows="2">{{$detail->description}}</textarea>
+                                </div>
+                            </div>
                         </div>
                       </div>
-                  </div>
+
+                    @endforeach
+
+                  @else
+                    <div class=" text-center font-weight-bold" role="alert">No detail found</div>
+                  @endif
+
 
                   <br>
                     <h4>Preliminary Report</h4>
@@ -78,9 +133,7 @@
 
                   @else
 
-                    <a href="#" target="_blank" class="text-success d-block text-truncate"> 
-                      No preliminary report found
-                    </a>
+                  <div class="alert alert-warning text-center" role="alert">No preliminary report found</div>
 
                   @endif
 
@@ -91,38 +144,29 @@
 
                   @if( count($complain->nodalAdditionalDetails) >= 1 )
 
-                  @foreach($complain->nodalAdditionalDetails as $index => $detail)
-                    <div id="rowContainer">
-                      <div class="row dub-row">
-                          <div class="col-md-2">
-                              <div class="form-group">
-                                  <label for="exampleInputUsername1">Document</label>
-                                  <a href="{{ route('preview.file',$detail->file) }}" target="_blank" class="text-success d-block text-truncate"> 
-                                      View Document 
-                                  </a>
-                              </div>
-                          </div>
-                          <div class="col-md-10">
-                              <div class="form-group">
-                                  <label for="exampleInputUsername1"> Additional Detail</label>
-                                  <textarea class="form-control" disabled id="exampleInputUsername1" cols="30" rows="4">{{ $detail->description }}</textarea>
-                              </div>
-                          </div>
+                    @foreach($complain->nodalAdditionalDetails as $index => $detail)
+                      <div id="rowContainer">
+                        <div class="row dub-row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Document</label>
+                                    <a href="{{ route('preview.file',$detail->file) }}" target="_blank" class="text-success d-block text-truncate"> 
+                                      <span> #{{$index+1}}</span>  View Document
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1"> Document Detail</label>
+                                    <textarea class="form-control" disabled id="exampleInputUsername1" cols="30" rows="4">{{ $detail->description }}</textarea>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                    </div>
-                  @endforeach
+                    @endforeach
 
                   @else
-
-                  <div id="rowContainer">
-                      <div class="row dub-row">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label for="exampleInputUsername1">No documents found</label>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
+                    <div class="alert alert-warning text-center" role="alert">No other related documents found</div>
                   @endif
 
                 </form>

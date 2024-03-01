@@ -66,7 +66,7 @@ class ComplaintController extends Controller{
                 }
             }
 
-            return redirect()->route('user.complaints')->with('success', 'Complain has been created');
+            return redirect()->route('user.complaints')->with('success', 'Complaint has been created and the complaint number is ' . $complain->complain_no);
             
         } catch (\Exception $e) {
             // dd($e);

@@ -14,7 +14,7 @@
                         </p>
 
                         <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
+                            <a class="btn btn-primary" href="{{ route('audit') }}">Go  Back</a>
                         </div>
 
                         <!-- Error Section Start Here 'message-block' -->
@@ -27,14 +27,13 @@
                                 <thead>
                                     <tr>
                                     <th> #Index </th>
-                                    <th> Complaint No. </th>
-                                    <th> Date of Complaint </th>
-                                    <th> Complaint Against </th>
-                                    <th> Department/Section </th>
-                                    <th> ONGC Work Centre </th>
-                                    <th> complaint Status </th>
-                                    <th> Public Detailed Status </th>
-                                    <th> Action </th>
+                                    <th> User </th>
+                                    <th> Event </th>
+                                    <th> Old Changes </th>
+                                    <th> New Changes </th>
+                                    <th> created At </th>
+                                    <th> Ip Address </th>
+                                    <!-- <th> Action </th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,16 +49,18 @@
                                     @foreach($lists as $index => $list)
                                         <tr>
                                             <td> {{ $index + 1 }} </td>
-                                            <td> {{ $list->complain_no }} </td>
-                                            <td> {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}</td>
-                                            <td> {{ $list->against_persons }} </td>
-                                            <td> {{ $list->department_section }} </td>
-                                            <td> {{ $list->work_centre }} </td>
-                                            <td> {{ $list->complaint_status }} </td>
-                                            <td>{{ $list->public_status ? $list->public_status : '---' }}</td>
-                                            <td>
-                                                <a href="{{ route('user.complaint.view', $list->id) }}" class="btn btn-sm link-with-icon"> <i class="ti-eye "></i> </a>
-                                            </td>
+                                            <td> {{ json_encode($list->user_id) }} </td>
+                                            <td> {{ json_encode(ucfirst($list->event)) }} </td>
+                                            <td> {{ json_encode($list->old_values) }} </td>
+                                            <td> {{ json_encode($list->new_values) }} </td>
+                                            <!-- <td> {{ $list }} </td> -->
+                                            <td> {{ json_encode(\Carbon\Carbon::parse($list->created_at)->format('d F Y')) }}</td>
+                                            <td> {{ json_encode($list->ip_address) }} </td>
+                                            <!-- <td>
+                                                <a href="" class="btn btn-sm">
+                                                    <i class="ti-eye "></i>
+                                                </a>
+                                            </td> -->
                                         </tr>
                                     @endforeach
 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('department_section')->required();
             $table->string('against_persons')->nullable();
             $table->string('public_status')->nullable();
-            $table->string('complaint_status')->nullable();
+            $table->string('complaint_status')->default('With Nodal Officer');
             $table->bigInteger('preliminary_report')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();

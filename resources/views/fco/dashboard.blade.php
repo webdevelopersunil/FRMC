@@ -30,13 +30,24 @@
                               <th> Complaint Against </th>
                               <th> Department/Section </th>
                               <th> ONGC Work Centre </th>
-                              <th>Nodel Officer</th>
+                              <!-- <th>Nodel Officer</th> -->
                               <th>Complaint Status</th>
+                              <th> Preliminary Report</th>
+                              <th> Public Detailed Status </th>
                               <th> Action </th>
                             </tr>
                           </thead>
 
                           <tbody>
+                                @if( count($lists) == 0 )
+                                    <tr>
+                                        <td colspan="9" >
+                                            <div class="alert alert-primary text-center" role="alert">
+                                                No data found
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                                 @foreach($lists as $index => $list)
                                   <tr>
                                     <td> {{ $index + 1 }} </td>
@@ -45,10 +56,22 @@
                                     <td> {{ $list->against_persons }} </td>
                                     <td> {{ $list->department_section }} </td>
                                     <td> {{ $list->work_centre }} </td>
-                                    <td> Nodel Officer </td>
-                                    <td> Complaint Status </td>
+                                    <td> {{ $list->complaint_status }} </td>
                                     <td>
-                                    <a href="{{ route('fco.complaint.view', $list->id) }}">View</a> | <a href="{{ route('fco.complaint.edit', $list->id) }}">Edit</a>
+                                      @if( isset($list->preliminaryReport->id) )
+                                          <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="text-primary d-block text-truncate">
+                                              View Report
+                                          </a>
+                                      @else
+                                          <a href="#" class="text-danger d-block text-truncate">
+                                              No Report Found
+                                          </a>
+                                      @endif
+                                  </td>
+                                  <td>{{ $list->public_status ? $list->public_status : '---' }}</td>
+                                    <td>
+                                      <a href="{{ route('fco.complaint.view', $list->id) }}" class="btn btn-sm link-with-icon"> <i class="ti-eye "></i> </a>
+                                      <a href="{{ route('fco.complaint.edit', $list->id) }}" class="btn btn-sm link-with-icon"> <i class="ti-pencil "></i> </a>
                                     </td>
                                   </tr>
                               @endforeach

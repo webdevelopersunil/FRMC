@@ -13,9 +13,9 @@
                             <!-- Add class <code>.table-striped</code> -->
                         </p>
 
-                        <div class="d-flex justify-content-end mb-3">
+                        <!-- <div class="d-flex justify-content-end mb-3">
                             <a class="btn btn-primary" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
-                        </div>
+                        </div> -->
 
                         <!-- Error Section Start Here 'message-block' -->
                             @include('includes/message-block')
@@ -32,7 +32,6 @@
                                     <th> Complaint Against </th>
                                     <th> Department/Section </th>
                                     <th> ONGC Work Centre </th>
-                                    <th> complaint Status </th>
                                     <th> Public Detailed Status </th>
                                     <th> Action </th>
                                     </tr>
@@ -55,10 +54,9 @@
                                             <td> {{ $list->against_persons }} </td>
                                             <td> {{ $list->department_section }} </td>
                                             <td> {{ $list->work_centre }} </td>
-                                            <td> {{ $list->complaint_status }} </td>
                                             <td>{{ $list->public_status ? $list->public_status : '---' }}</td>
                                             <td>
-                                                <a href="{{ route('user.complaint.view', $list->id) }}" class="btn btn-sm link-with-icon"> <i class="ti-eye "></i> </a>
+                                                <a href="{{ route('view.audit', $list->id) }}" class="btn btn-sm"> <i class="ti-eye "></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach

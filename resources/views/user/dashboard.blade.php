@@ -12,13 +12,19 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Registered Complaints</p>
+
+                <p class="card-title" style="display:flex;" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                        <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                    </svg>Complaints List
+                </p>
+
                   <div class="row">
                     <div class="col-12">
                       <div class="table-responsive">
 
                         <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
+                            <a class="btn btn-primary add-btn" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
                         </div>
 
                         <table id="example" class="display expandable-table" style="width:100%">
@@ -48,7 +54,7 @@
                               @endif
                               @foreach($lists as $index => $list)
                                 <tr>
-                                  <td> {{ $index + 1 }} </td>
+                                  <td> <u style="color: #840c0c;" >{{ ($lists->currentPage() - 1) * $lists->perPage() + $loop->iteration }}</u> </td>
                                   <td> {{ $list->complain_no }} </td>
                                   <td> {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}</td>
                                   <td> {{ $list->against_persons }} </td>
@@ -57,7 +63,7 @@
                                   <td> {{ $list->complaint_status }} </td>
                                   <td>{{ $list->public_status ? $list->public_status : '---' }}</td>
                                   <td>
-                                    <a href="{{ route('user.complaint.view', $list->id) }}" class="btn btn-sm link-with-icon"> <i class="ti-eye "></i> </a>
+                                    <a href="{{ route('user.complaint.view', $list->id) }}" class="btn btn-sm link-with-icon eye-icon"> <i class="ti-eye"></i> </a>
                                   </td>
                                 </tr>
                               @endforeach

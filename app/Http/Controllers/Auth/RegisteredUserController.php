@@ -14,9 +14,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Ichtrojan\Otp\Otp;
+use App\Services\OtpService;
+use App\Mail\SendOtp;
+use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendOtpEmail;
 
 class RegisteredUserController extends Controller
 {
+
+    protected $otpService;
+
+    public function __construct(OtpService $otpService)
+    {
+        $this->otpService = $otpService;
+    }
+
     /**
      * Display the registration view.
      */
@@ -48,7 +60,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ])->assignRole('user');
 
+
         $otp    =   (new Otp)->generate($request->username, 'numeric', 6, 15);
+
+        Mail::to($user->email)->send(new SendOtp($otp->token));
+        // SendOtpEmail::dispatch($user->email, $otp->token);
+
+        // OTP Sending
+        $status = $this->otpService->sendOtp(intval($request->username), strval($otp->token));
         
         event(new Registered($user));
         
@@ -72,7 +91,8 @@ class RegisteredUserController extends Controller
                 return redirect()->back()->withErrors(['otp' => 'Please enter valid OTP.']);   
             }
 
-            $user->is_phone_verified = '1'; // Assuming is_phone_verified is a boolean field
+            $user->is_phone_verified = '1';
+
             $user->save();
 
             Auth::login($user);

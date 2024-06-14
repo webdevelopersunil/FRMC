@@ -1,10 +1,10 @@
 <div class="col-md-12 grid-margin stretch-card" >
-    <div class="card">
+    <div class="card detail-card">
 
     <div class="row text-center">
         <div class="col-md-12">
-            <div class="card-body" style="border-bottom: 1px solid blue;" >
-                <h4 class="card-title"  > Nodal Uploaded Detail </h4>
+            <div class="card-body" >
+                <h4 class="card-title underline-css"> Nodal Uploaded Detail </h4>
             </div>
         </div>
     </div>
@@ -13,15 +13,20 @@
         <div class="col-md-12 ">
             <div class="card-body">
                 <h4 class="card-title">Preliminary Report</h4>
+                @if(isset($complain->preliminaryReport))
+                <h5><a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-color d-block text-truncate">View Document </a></h5>
+                @else
+                <h5><a href="javascript:void(0)" class="text-color d-block text-truncate">No Preliminary Report Found</a></h5>
+                @endif
             </div>
         </div>
     </div>
 
-    @if(isset($complain->preliminaryReport))
+    <!-- @if(isset($complain->preliminaryReport))
         <div class="row text-center">
             <div class="col-md-12 ">
                 <div class="card-body">
-                    <a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-success d-block text-truncate">View Document
+                    <a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-color d-block text-truncate">View Document
                     </a>
                 </div>
             </div>
@@ -30,13 +35,13 @@
         <div class="row text-center">
             <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <div class="alert alert-primary" role="alert">
+                    <div class="alert text-css404" role="alert">
                         No Documents Found
                     </div>
                 </div>
             <div class="col-md-1"></div>
         </div>
-    @endif
+    @endif -->
 
     <div class="row text-center">
         <div class="col-md-4 ">
@@ -55,19 +60,17 @@
 
         @foreach($complain->nodalAdditionalDetails as $index => $detail)
 
-            <div class="row text-center">
+            <div class="row text-center loop-document-detail">
                 <div class="col-md-4 ">
                     <div class="card-body">
-                        <!-- <h4 class="card-title">Document</h4> -->
-                        <a href="{{ route('preview.file',$detail->file->id) }}" target="_blank" class="text-success d-block text-truncate"> 
+                        <a href="{{ route('preview.file',$detail->file->id) }}" target="_blank" class="text-color d-block text-truncate"> 
                         <span> #{{$index+1}}</span>  View Document
                         </a>
                     </div>
                 </div>
                 <div class="col-md-8 ">
                     <div class="card-body">
-                        <!-- <h4 class="card-title">Document Description</h4> -->
-                        <p class="card-description">{{$detail->description}}</p>
+                        <p class="card-description">{{ ucfirst($detail->description) }}</p>
                     </div>
                 </div>
             </div>
@@ -77,32 +80,12 @@
         <div class="row text-center">
             <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <div class="alert alert-primary" role="alert">
+                    <div class="alert text-css404" role="alert">
                         No Documents Found
                     </div>
                 </div>
             <div class="col-md-1"></div>
         </div>
     @endif
-    </div>
-</div>
-
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="showMoreModal" tabindex="-1" role="dialog" aria-labelledby="showMoreModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="showMoreModalLabel">Full Description</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body  ">
-                <p>{{ $complain->description }}</p>
-            </div>
-        </div>
     </div>
 </div>

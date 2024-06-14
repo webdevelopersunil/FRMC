@@ -6,10 +6,19 @@
     <div class="content-wrapper">
           <div class="row">
 
+            @include('includes/complain_detail')
+            @include('includes/nodal_complain_detail')
+
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Updation by the office of FCO</h4>
+
+                  <div class="d-flex justify-content-end mb-3">
+                      <a class="btn add-btn" style="color:white; border:none;" href="{{ route('fco.change.work.centre',$list_id) }}">Change Work Centre</a>
+                  </div>
+                  
+                  <br>
 
                   <!-- Error Section Start Here 'message-block' -->
                     @include('includes/message-block')
@@ -20,7 +29,7 @@
                       @csrf
                     <input type="hidden" value="{{$list_id}}" name="id">
                   
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputUsername1">Nodel Officer</label>
@@ -41,7 +50,7 @@
                               </select>
                           </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">
@@ -62,74 +71,31 @@
                         </div>
                     </div>
 
-                    <!-- <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Withdrawn – to be ignored</label>
-                              <select class="form-control form-control-lg" id="exampleFormControlSelect1">
-                                <option>YES</option>
-                                <option>NO</option>
-                              </select>
-                          </div>
-                        </div>
-                    </div> -->
-
-                    
                     <br> <br>
+
                     <h5 class="card-title">Updation by the office of FCO</h5>
+                    <br><br>
+                    <div id="rowContainer">
+                      <div class="row dub-row">
 
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Public</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="publicInput">
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary" id="addPublic">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title">Public – Visible to all users</h4>
-                              <ul id="public_visible">
-                              
-                                @foreach( $public as $publicStatus )
-                                  <li> {{ $publicStatus->public }} <a href="#" style="color:red; text-align:right;" class="removeItem">X</a></li>
-                                @endforeach
-
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputUsername1">Private</label>
-                              <div class="input-group">
-                                  <input type="text" class="form-control" id="privateInput" >
-                                  <div class="input-group-append">
-                                      <button type="button" onclick class="btn btn-primary" id="addPrivate" >Add</button>
-                                  </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputUsername1">Public – Visible to all users</label>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="public" cols="30" rows="4">{{ isset($detailedStatus->public) ? $detailedStatus->public : null }}</textarea>
                               </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h4 class="card-title">Private – Visible to only the users associated with the office of FCO</h4>
-                              <ul id="private_visible" >
 
-                                  @foreach( $private as $privateStatus )
-                                    <li> {{ $privateStatus->private }} <a href="#" style="color:red; text-align:right;" class="removeItem">X</a></li>
-                                  @endforeach
-
-                              </ul>
-                            </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputUsername1">Private – Visible to only the users associated with the office of FCO</label>
+                                  <textarea class="form-control" id="exampleInputUsername1" name="private" cols="30" rows="4">{{ isset($detailedStatus->private) ? $detailedStatus->private : null }}</textarea>
+                              </div>
                           </div>
+                          
                       </div>
-                    </div>
+                    </div>  
 
-
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="submit" style="color:white; border:none;" class="btn add-btn mr-2">Submit</button>
                     <a href="{{ route('fco.complaints') }}" class="btn btn-light">Cancel</a>
                   </form>
                 </div>
@@ -140,50 +106,4 @@
             
           </div>
         </div>
-
-
-
-<script>
-    document.getElementById("addPublic").addEventListener("click", function() {
-
-        var publicInputValue = document.getElementById("publicInput").value;
-        if(publicInputValue!=''){
-          var privateVisibleList = document.getElementById("public_visible");
-          var newListItem = document.createElement("li");
-          
-          newListItem.innerHTML = publicInputValue + ' <input type="hidden" name="public[]"  value="' + publicInputValue + '"> &nbsp &nbsp <a href="#" style="color:red; text-align:right;" class="removeItem">X</a>';
-
-          privateVisibleList.appendChild(newListItem);
-        }
-    });
-
-    // Add event listener to dynamically created "X" links
-    document.getElementById("public_visible").addEventListener("click", function(event) {
-        if (event.target.classList.contains("removeItem")) {
-            event.preventDefault(); // Prevent the default behavior of the link
-            event.target.parentElement.remove(); // Remove the list item containing the "X" link
-        }
-    });
-
-
-    document.getElementById("addPrivate").addEventListener("click", function() {
-
-    var publicInputValue = document.getElementById("privateInput").value;
-    if(publicInputValue!=''){
-      var privateVisibleList = document.getElementById("private_visible");
-      var newListItem = document.createElement("li");
-      
-      newListItem.innerHTML = publicInputValue + ' <input type="hidden" name="private[]"  value="' + publicInputValue + '"> &nbsp &nbsp <a href="#" style="color:red; text-align:right;" class="removeItem">X</a>';
-      privateVisibleList.appendChild(newListItem);
-    }
-    });
-    // Add event listener to dynamically created "X" links
-    document.getElementById("private_visible").addEventListener("click", function(event) {
-    if (event.target.classList.contains("removeItem")) {
-        event.preventDefault(); // Prevent the default behavior of the link
-        event.target.parentElement.remove(); // Remove the list item containing the "X" link
-    }
-    });
-
-</script>
 </x-app-layout>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('directory')->required();
             $table->string('mime')->required();
             $table->string('size')->nullable();
+            $table->enum('role',['user','nodal','fco'])->required();
             $table->softDeletes();
             $table->timestamps();
         });

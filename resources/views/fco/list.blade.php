@@ -10,13 +10,24 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">FCO User</h4><br>
+                        
+                        <p class="card-title" style="display:flex;" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                                <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                            </svg>Complaints List
+                        </p>
         
                         <div class="table-responsive">
 
                         <!-- Error Section Start Here 'message-block' -->
                             @include('includes/message-block')
                         <!-- Error Section Ends Here -->
+
+                        <!-- File Section Start Here 'message-block' -->
+                        @include('filters.filter', ['route' => 'fco.complaints'])
+                        <!-- File Section Start Here 'message-block' -->
+
+                        <br>
                     
                         <table id="example" class="display expandable-table" style="width:100%">
                             <thead>
@@ -37,7 +48,7 @@
                             <tbody>
                                 @if( count($lists) == 0 )
                                     <tr>
-                                        <td colspan="9" >
+                                        <td colspan="10" >
                                             <div class="alert alert-primary text-center" role="alert">
                                                 No data found
                                             </div>
@@ -55,7 +66,7 @@
                                         <td> {{ $list->complaint_status }} </td>
                                         <td>
                                             @if( isset($list->preliminaryReport->id) )
-                                                <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="text-primary d-block text-truncate">
+                                                <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="d-block text-truncate">
                                                     View Report
                                                 </a>
                                             @else

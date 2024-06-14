@@ -4,16 +4,18 @@
     
       <div class="content-wrapper">
           
-        <!-- Blocks section start here -->
-          @include('includes/block')
-        <!-- Blocks section ends here -->
+          @include('includes/block') <!-- Blocks section start here -->
           
-
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Complaints</p>
+                <p class="card-title" style="display:flex;" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                    <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                  </svg>Complaints
+                </p>
+
                   <br>
                   <div class="row">
                     <div class="col-12">
@@ -37,7 +39,7 @@
                           <tbody>
                               @if( count($lists) == 0 )
                                   <tr>
-                                      <td colspan="9" >
+                                      <td colspan="10" >
                                           <div class="alert alert-primary text-center" role="alert">
                                               No data found
                                           </div>
@@ -55,7 +57,7 @@
                                   <td> {{ $list->complaint_status }} </td>
                                   <td>
                                       @if( isset($list->preliminaryReport->id) )
-                                          <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="text-primary d-block text-truncate">
+                                          <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="d-block text-truncate text-color">
                                               View Report
                                           </a>
                                       @else

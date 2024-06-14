@@ -21981,6 +21981,7 @@ code {
   -moz-transition: background 0.25s ease;
   -ms-transition: background 0.25s ease;
   border: none;
+  border: 2px solid #872828;
 }
 
 .card.tale-bg {
@@ -22017,6 +22018,7 @@ code {
   margin-bottom: .875rem;
   font-weight: 400;
   color: #76838f;
+  text-align: justify;
 }
 
 .card.card-outline-success {
@@ -28591,7 +28593,8 @@ div.tagsinput span.tag a {
 }
 
 .sidebar .nav .nav-item.active > .nav-link {
-  background: #4B49AC;
+  /* background: #4B49AC; */
+  background: #840c0c;
   position: relative;
 }
 
@@ -28620,9 +28623,10 @@ div.tagsinput span.tag a {
 .sidebar .nav:not(.sub-menu) > .nav-item {
   margin-top: .2rem;
 }
-
+/* side-bar-color-change */
 .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
-  background: #4B49AC;
+  /* background: #4B49AC; */
+  background: #7e1015;
   color: #fff;
 }
 
@@ -28819,7 +28823,8 @@ div.tagsinput span.tag a {
 
 .navbar .navbar-brand-wrapper .navbar-brand img {
   max-width: 100%;
-  height: 34px;
+  /* height: 34px; */
+  height: 55px;
   margin: auto;
   vertical-align: middle;
 }
@@ -28830,7 +28835,8 @@ div.tagsinput span.tag a {
 }
 
 .navbar .navbar-brand-wrapper .brand-logo-mini img {
-  width: calc(70px - 30px);
+  /* width: calc(70px - 30px); */
+  width: calc(70px - 0px);
   max-width: 100%;
   margin: auto;
 }

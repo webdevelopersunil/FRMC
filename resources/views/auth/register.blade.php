@@ -1,16 +1,17 @@
 <x-guest-layout>
 
   <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-    <h1>
-      <a href="" rel="dofollow">Register Portal</a>
-    </h1>
+      <h1 style="text-align: center;">
+          <img src="https://presentations.gov.in/wp-content/uploads/2020/06/ONGC-Preview.png" class="logo-image mr-2" alt="logo">
+          <a href="" rel="dofollow">FRMC</a>
+      </h1>
   </div>
 
   <div class="formbg-outer">
     <div class="formbg">
       <div class="formbg-inner padding-horizontal--48">
 
-        <span class="padding-bottom--15">Sign up with your details.</span>
+        <!-- <span class="padding-bottom--15">Sign up with your details.</span> -->
 
         <form method="POST" action="{{ route('register') }}">
 
@@ -69,20 +70,12 @@
           </div>
 
         </form>
-
+          <!-- For Footer Information Links -->
+          @include('includes/footer_links')
       </div>
     </div>
 
-    <div class="footer-link padding-top--24">
-      <span>Back To <a href="{{ route('complainant.login') }}">Login</a></span>
-
-      <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-        <!-- <span><a href="#">© Stackfindover</a></span> -->
-        <span><a href="#">Contact</a></span>
-        <span><a href="#">Privacy & terms</a></span>
-      </div>
-
-    </div>
+    
     
   </div>
 

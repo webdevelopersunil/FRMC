@@ -98,14 +98,14 @@
                         <div class="col-md-2">
                             <div class="form-group button-here ">
                                 <label for="exampleInputUsername1">&nbsp;&nbsp;</label>
-                                <input type="button" class="form-control addRowBtn btn btn-primary" value="Add">
+                                <input type="button" class="form-control addRowBtn btn btn-primary add-btn" value="Add">
                             </div>
                         </div>
                     </div>
                   </div> 
 
-                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                  <a class="btn btn-light" href="{{ route('user.complaints') }}">Cancel</a>
+                  <button type="submit" class="btn btn-primary mr-2 add-btn">Submit</button>
+                    <a class="btn btn-light" href="{{ route('user.complaints') }}">Cancel</a>
 
                 </form>
               </div>

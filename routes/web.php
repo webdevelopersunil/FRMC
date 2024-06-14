@@ -17,6 +17,9 @@ use App\Http\Controllers\User\ComplaintController as UserComplaintController;
 use App\Http\Controllers\Fco\DashboardController as FcoDashboardController;
 use App\Http\Controllers\Fco\ComplainantController as FcoComplaintController;
 
+
+use App\Services\OtpService;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +36,6 @@ Route::get('/view/audits/{id}', [AuditController::class, 'viewAudit'])->name('vi
 
 Route::middleware(['auth', 'verified', 'role:user,nodal,fco'])->group(function () {
     
-    Route::get('/view-file/{file}', [CommonController::class, 'viewFile'])->name('view-file');
     Route::get('/preview/file/{file_id}', [CommonController::class, 'previewFile'])->name('preview.file');
 });
 
@@ -82,15 +84,42 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Phone updation Route
+    Route::patch('/update/phone', [ProfileController::class, 'updatePhone'])->name('phone.update');
+    Route::post('/otp/verification', [ProfileController::class, 'otpVerification'])->name('otp.verification');
     
 });
 
 
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/user/login', [FrontendController::class, 'userLogin'])->name('user.login');
+
+Route::get('/admin/login', [FrontendController::class, 'adminLogin'])->name('admin.login');
+
 Route::get('complainant/login', [FrontendController::class, 'complainantLogin'])->name('complainant.login');
 Route::get('/otp-verification/{token}', [FrontendController::class, 'otpVerification'])->name('otp-verification');
 
 Route::post('/confirm/otp-verification', [RegisteredUserController::class, 'confirmOtpVerification'])->name('confirm.otp-verification');
+
+
+
+
+Route::get('/send-otp', function () {
+    
+    // Instantiate the OtpService
+    $otpService = new OtpService();
+
+    // Call the sendOtp method
+    $status = $otpService->sendOtp(7876976192, 202422, 'ABCD1234');
+    
+    // Output the status (or do something else with it)
+    echo $status;
+});
+
+
+Route::fallback([ProfileController::class, 'dashboard']);
+
+
 
 require __DIR__.'/auth.php';

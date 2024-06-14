@@ -4,17 +4,26 @@
 
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
 
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1><a href="" rel="dofollow">Login Portal</a></h1>
-        </div>
+      <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+          <h1 style="text-align: center;">
+              <img src="https://presentations.gov.in/wp-content/uploads/2020/06/ONGC-Preview.png" class="logo-image mr-2" alt="logo">
+              <a href="" rel="dofollow">FRMC</a>
+          </h1>
+      </div>
         
         <div class="formbg-outer">
 
           <div class="formbg">
+
+            <div class=" padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+              <h1>
+                <!-- <img src="{{ asset('assets/images/sidebar-logo/favicon.png') }}" alt=""> -->
+                <a href="#" style="color:#840c0c;" rel="dofollow">FRMC Portal</a>
+              </h1>
+            </div>
             <div class="formbg-inner padding-horizontal--48">
 
-              <span class="padding-bottom--15">Sign in to your account</span>
-
+              <!-- <span class="padding-bottom--15">Sign in to your account</span> -->
               <form method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -49,21 +58,16 @@
                   </label>
                 </div>
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Login">
+                  <input class="add-btn" type="submit" name="submit" value="Login">
                 </div>
                 <div class="field">
-                  <a class="ssolink" href="{{ route('login') }}">← Login as Admin</a>
+                  <a class="ssolink" href="{{ route('admin.login') }}">← Login as Admin</a>
                 </div>
               </form>
-            </div>
-          </div>
- 
-          <div class="footer-link padding-top--24">
-            <span>Don't have an account? <a href="{{ route('register') }}">Sign up</a></span>
-            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-              <!-- <span><a href="#">© Stackfindover</a></span> -->
-              <span><a href="#">Contact</a></span>
-              <span><a href="#">Privacy & terms</a></span>
+
+              <!-- For Footer Information Links -->
+              @include('includes/footer_links')
+
             </div>
           </div>
         </div>

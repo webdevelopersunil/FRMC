@@ -4,6 +4,12 @@
 
     <div class="content-wrapper">  
       <div class="row">
+
+        <div class="card-body">
+          <div class="d-flex justify-content-end mb-3">
+              <a class="btn add-btn" href="{{ route('nodal.complaints') }}"> Go Back</a>
+          </div>
+        </div>
         
         @include('includes/complain_detail')
         
@@ -12,9 +18,8 @@
         <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
+              <h4 class="card-title underline-css">Updation by Nodal Officer</h4>
 
-              <h4 class="card-title">Updation by Nodal Officer</h4>
-              
               <br>
 
               <!-- Error Section Start Here 'message-block' -->
@@ -43,7 +48,7 @@
                         <div class="form-group">
                             <label for="exampleInputUsername1">Uploaded Preliminary Report</label>
                             @if( isset($complain->preliminaryReport->id) )
-                                <a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-primary d-block text-truncate">
+                                <a href="{{ route('preview.file',$complain->preliminaryReport->id) }}" target="_blank" class="text-color d-block text-truncate">
                                   View Uploaded Preliminary Report
                                 </a>
                             @else
@@ -77,13 +82,13 @@
                       <div class="col-md-2">
                           <div class="form-group button-here ">
                               <label for="exampleInputUsername1">&nbsp;&nbsp;</label>
-                              <input type="button" class="form-control addRowBtn btn btn-primary" value="Add">
+                              <input type="button" class="form-control addRowBtn add-btn btn btn-primary" value="Add">
                           </div>
                       </div>
                   </div>
                 </div>                  
 
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="submit" style="color:white; border:none;" class="btn add-btn mr-2">Submit</button>
                 <a href="{{ route('nodal.complaints') }}" class="btn btn-light">Cancel</a>
 
               </form>

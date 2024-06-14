@@ -12,14 +12,14 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Complaints</p>
+                  <p class="card-title" style="display:flex;" >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                          <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                      </svg>Complaints List
+                  </p>
                   <div class="row">
                     <div class="col-12">
                       <div class="table-responsive">
-
-                        <!-- <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href=""> + New Complaint</a>
-                        </div> -->
 
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
@@ -59,7 +59,7 @@
                                     <td> {{ $list->complaint_status }} </td>
                                     <td>
                                       @if( isset($list->preliminaryReport->id) )
-                                          <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="text-primary d-block text-truncate">
+                                          <a href="{{ route('preview.file',$list->preliminaryReport->id) }}" target="_blank" class="d-block text-truncate">
                                               View Report
                                           </a>
                                       @else

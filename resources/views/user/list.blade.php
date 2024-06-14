@@ -8,19 +8,25 @@
                 <div class="card">
                     <div class="card-body">
                     
-                        <h4 class="card-title">Complaints List</h4>
-                        <p class="card-description">
-                            <!-- Add class <code>.table-striped</code> -->
+                        <p class="card-title" style="display:flex;" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;">
+                                <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                            </svg>Complaints List
                         </p>
 
                         <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
+                            <a class="btn btn-primary add-btn" href="{{ route('user.complaint.create') }}"> + New Complaint</a>
                         </div>
 
                         <!-- Error Section Start Here 'message-block' -->
                             @include('includes/message-block')
                         <!-- Error Section Ends Here -->
 
+                        <!-- File Section Start Here 'message-block' -->
+                        @include('filters.filter', ['route' => 'user.complaints'])
+                        <!-- File Section Start Here 'message-block' -->
+
+                        <br>
 
                         <div class="table-responsive">
                             <table id="example" class="display expandable-table" style="width:100%">
@@ -49,7 +55,7 @@
                                     @endif
                                     @foreach($lists as $index => $list)
                                         <tr>
-                                            <td> {{ $index + 1 }} </td>
+                                            <td> <u style="color: #840c0c;" >{{ ($lists->currentPage() - 1) * $lists->perPage() + $loop->iteration }}</u> </td>
                                             <td> {{ $list->complain_no }} </td>
                                             <td> {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}</td>
                                             <td> {{ $list->against_persons }} </td>
@@ -76,5 +82,4 @@
         </div>
     </div>
 <!-- content-wrapper ends -->
-
 </x-app-layout>

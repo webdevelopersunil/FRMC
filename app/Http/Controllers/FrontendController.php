@@ -16,6 +16,11 @@ class FrontendController extends Controller{
         return redirect('login');
     }
 
+    public function adminLogin(){
+
+        return view('auth.login');
+    }
+
     public function complainantLogin(){
 
         return view('auth.user_login');
@@ -34,7 +39,7 @@ class FrontendController extends Controller{
                 return redirect()->route('user.dashboard');
             } else {
                 // If user is not logged in, redirect to login route
-                return redirect()->route('complainant.login');
+                return redirect()->route('login');
             }
 
         }else{

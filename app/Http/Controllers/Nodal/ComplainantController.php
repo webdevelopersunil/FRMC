@@ -25,7 +25,35 @@ class ComplainantController extends Controller{
 
     public function index(Request $request){
 
-        $lists  =   Complain::with('preliminaryReport')->paginate(10);
+        $query  =   Complain::query();
+
+        // Onclick Filteration
+        if (isset($request->work_centre) && !empty($request->work_centre)) {
+            $query->where('work_centre', 'LIKE', '%' . $request->work_centre . '%');
+        }
+        if (isset($request->department_section) && !empty($request->department_section)) {
+            $query->where('department_section', 'LIKE', '%' . $request->department_section . '%');
+        }
+
+        // Filteration section
+        if (isset($request->text) && !empty($request->text)) {
+            $query->where(function ($query) use ($request) {
+                $query->where('complain_no', 'LIKE', '%' . $request->text . '%')
+                    ->orWhere('work_centre', 'LIKE', '%' . $request->text . '%')
+                    ->orWhere('against_persons', 'LIKE', '%' . $request->text . '%');
+            });
+        }
+
+        // sorting portion
+        if ($request->sort == 'name') {
+            $query->orderBy('name', $by);
+
+        } else if( $request->sort == 'os' ){
+            $query->orderBy('operating_system', $by);
+            
+        }
+
+        $lists  =   $query->with('preliminaryReport')->paginate(10)->withQueryString();
 
         return view('nodal.list', compact('lists'));
     }

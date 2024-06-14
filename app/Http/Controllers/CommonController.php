@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class CommonController extends Controller{
 
@@ -26,6 +27,15 @@ class CommonController extends Controller{
     public function previewFile($file_id){
 
         $file       =   File::find($file_id);
+
+        $role       =   Auth::user()->getRoleNames()[0];
+        $file_role  =   $file->role;
+
+        if($role == "user"){
+            if( $file_role != "user" ){
+                abort(404);
+            }
+        }
 
         $filePath   =   "{$file->directory}{$file->name}";
 
